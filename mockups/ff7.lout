@@ -1,0 +1,130 @@
+# This is an example graphical layout file for FF7,
+# the original target of the StreamStatus software.
+# Format is essentially VARIABLE:VALUE:MOREVALUES[...]
+# in terms of layout variables, this is 
+# XMLTAG:FORMATTAG:MINSIZE:MAXSIZE:PAD, with 0 for maxsize meaning
+# "as much as will fit", and PAD being "Y" or "N" for whether
+# the record should be padded to maximum size, with N assumed
+# if the parameter is missing.
+#
+# Lines beginning with # are ignored.
+#
+# Other tags are as follows:
+# SSLAYOUT: Header, defines this as an SSLAYOUT tag, its data is
+# the version of StreamStatus the layout is meant for.
+#
+# FONT: The font and size the layout is designed to run on.
+# layouts should be usable on various fonts and sizes, but this
+# should be the most tested layout. Multiple of these directives
+# can be defined for multiple tested layouts, with the first one
+# being preferred.
+# 
+# FIXEDWIDTH: Defines if the default font choice is fixed width.
+# Fixed width fonts are more precise for layout purposes and can
+# therefore use less computationally expensive image generation 
+# functions. In future versions, this may be determined automatically.
+#
+# WRAPTEMPLATE: This should be the amount of characters horziontally
+# it takes to go from the STARTPOINT (see below) to the rightmost
+# edge of the area you want to print to. This is used to determine
+# when to wordwrap. In future versions this may be determined 
+# automatically.
+#
+# STARTPOINT: This is the X and Y point, in pixels, where we want
+# the generator to place the "beginning" of the image. If either
+# of the CENTERED parameters are set to 1, the corresponding field can
+# be omitted or left as 0.
+#
+# CENTERED: Optional. Defines whether the text will be centered 
+# horizontally, vertically, or both. Each parameters is in the 
+# format Y or N, first parameter is horizontal, second is
+# vertical. If omitted, it is assumed you do not want centering 
+# at all.
+#
+# COLOR: Defines the color of the text in RGBA format, with A being
+# between 0 (fully opaque) and 127 (fully transparent.)
+#
+# DROPSHADOW: Optional. Defines that a dropshadow should be applied,
+# the parameters are the X and Y offsets of said dropshadow.
+#
+# DROPCOLOR: Defines the dropshadow color. See COLOR. 
+#
+# VARS:START: Signals the beginning of the variables section. Anything
+# between this and TAGS:END should be a layout variable or table related.
+#
+# TABLE:START: Begins a table. The first variable is the name of the table's
+# beginning XML tag, the second is the name of the XML tag that begins
+# each individual record, the third is the minimum number of records,
+# and the fourth is the amount of columns in each record. Any variables
+# between this and the matching TABLE:END are assumed to be part of this table.
+# If there is only one column, you may forego using a tag to begin and end
+# each record. In this case, leave the second parameter blank.
+#
+# TABLE:VAR: This signifies what layout character should begin and end a
+# section that should be repeated for each record of a table.
+#
+# TABLE:END: Signifies the end of a table. The first flag of the beginning table
+# signals which table is ending.
+#
+# TAGS:END: Signals the end of all tags and the beginning of the actual
+# textual layout.
+#
+# In the layout, | surrounds a section that should always be wrapped
+# if necessary, while & surrounds static text that should be matched
+# in length if necessary with any nearby (within 2 lines) static text
+# also surrounded by &. This should not be necessary if you're 
+# using only fixed width fonts. * surrounds a section that should be
+# replaced by space if the line is wrapped. 
+# 
+# To avoid accidentally extending the layout in the case of excess
+# whitespace at the end of the file, you can terminate the layout with
+# a series of three + signs. If anybody is old enough to remember
+# why +++ would be used to terminate something... Well, congrats
+# for getting the reference. Anything following +++ will be ignored.
+#
+SSLAYOUT:2.0
+FONT:verdana.ttf/18
+FONT:micross.ttf/20
+FIXEDWIDTH:N
+WRAPTEMPLATE:AAAAAAAAAAAAAAAAAA
+STARTPOINT:25:0
+CENTERED:N:Y
+COLOR:255:255:255:0
+DROPSHADOW:2:2
+DROPCOLOR:0:0:0:0
+START
+VARS:START
+DISC:%d:1:1:N
+LOCATION:%l:1:31:N
+LASTEVENT:%e:1:0:N
+TABLE:START:MODS::1:1
+TABLE:VAR:%M
+MOD:%m:1:0:N
+TABLE:END:MODS
+TABLE:START:PARTY:MEMBER:1:2
+TABLE:VAR:%P
+NAME:%n:1:9:Y
+LEVEL:%L:1:2:N
+TABLE:END:PARTY
+LOCALTIME:%t:8:8
+STREAMTIME:%s:8:8
+GAMETIME:%g:8:8
+TAGS:END
+Disc %d
+
+Party:
+%P    %n L -%L %P
+
+Location:
+    %l
+
+When we left off:
+|    %e|
+
+Time:
+    &Local:& %t
+    &Stream:& %s
+    &In-Game:& %g
+
+Mods:
+%M|   *-* %m|%M+++ATH0

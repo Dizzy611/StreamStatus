@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--StreamStatus Memory Layout file.
+    format is fairly simple, essentially an XML file with a header.
+    Some special tags are defined however.
+
+	Input/output types are one of offset, byte, string, word, 
+	or dword.
+	
+    <lut tag="tagname" type="offset" input="0x4F8,0x4F9,0x4Fa" intype="byte">
+        Specifies a 'look up table', where the value of one
+        memory address determines what other memory addresses 
+		are used, or where a value is turned into another value.
+		The above defines an offset lookup table. Input is where
+		to look for the ID (in the example) to map to an offset.
+	<lut tag="tagname" type="value" intype="byte" outtype="byte">
+		Value lookup table. This simply replaces one value with
+		another. 
+		
+	<map in="input">output</map>
+		Used in both kinds of LUT, maps an input to an output.
+	
+	<maprange in="0x00-0x60" out="0x20-0x80" />
+		Maps a whole range of values to another range of values,
+		linearly. If out is a single value, the entire range is
+		mapped to this value.
+		
+	<mapelse type="error"/>
+		Mapelse specifies what should be done with lookup values
+		that don't match the table. In this case, return an error
+		value (usually 0xDEAD for 16-bit offsets and words, 0xDEADBEEF for
+		32-bit offsets and dwords, 0xFF for 8-bit offsets and bytes, 
+		and DEADBEEF for strings.
+	
+	<mapelse>output</mapelse>
+		The last type of mapelse, simply map any nonmatching values
+		to this value.
+	
+	A special case: if the output of map or mapelse is "noentry", this means
+	that this value will result in no tag.
+	
+    <rel offset="offset">
+	    Specify an offset to which the contained entries are 
+		relative. These can be nested, which will produce an offset
+		of an offset. :P 
+	
+	<taghere offset="offset" intype="type" length="0x20" lut="lut" stringmap />
+	<taghere offset="offset" intype="dword" time />
+    	A tag. Lut defines which look up table to use, if any, and
+		is optional. Stringmap is a special tag that, if present,
+		means that a range of bytes will be mapped to another 
+		range of bytes as a null-terminated string. Length, only
+		valid for string types, is the length of the string to be
+		returned. Time is a special tag that means that the value is 
+		a number of seconds and should be displayed and output as 
+		a 0-padded time in HH:MM:SS format. All values except 
+		offset and intype are optional.
+		
+	<taghere type="timer" />
+		A special tag that means that this value is a count of how
+		many seconds the updater has been live.
+	
+	<taghere type="user" utype="textbox" />
+		A special tag that means that this value is user entered.
+		utype refers to the type of input. Currently only textbox
+		and list are supported.
+	
+	<taghere type="user" utype="list" entry="mod" />
+		Example of a list. Entry is the tag used for each individual
+		entry.
+	
+	Tags with no type or offset are simply layout tags.
+	A special layout tag is one with "repeat":
+	
+	<taghere type="repeat" offset="lut" lut="char" times="3"/>
+	<taghere type="repeat" offset="0x08" times="3"/>
+	<taghere type="repeat" offset="static" times="3"/>
+		A layout tag with "repeat" means that the following section
+		will be repeated the number of times indicated. If offset
+		is LUT, this means follow the array of LUT inputs, wrapping
+		around if necessary. If the offset is a hexadecimal number,
+		increase all offset values by that number each repeat.
+		If the offset is static, do nothing to the offsets on each
+		repeat. If a repeating member is offset type "lut", all offsets
+		in the member tags are assumed to be relative to the offset
+		returned by the LUT.
+		
+-->
+<memlayout>
+	<rel offset="0x00DBFD38">
+		<lut tag="char" type="offset" input="0x04F8,0x04F9,0x04FA" intype="byte">
+            <map input="0x00">0x0054</map>
+            <map input="0x01">0x00D8</map>
+            <map input="0x02">0x015C</map>
+            <map input="0x03">0x01E0</map>
+            <map input="0x04">0x0264</map>
+            <map input="0x05">0x02E8</map>
+            <map input="0x06">0x036C</map>
+            <map input="0x07">0x03F0</map>
+            <map input="0x08">0x0474</map>
+            <map input="0x09">0x036C</map>
+            <map input="0x0A">0x03F0</map>
+            <mapelse>noentry</mapelse>
+		</lut>
+		<lut tag="ffstring" type="value" in="byte" out="byte">
+			<maprange in="0x00-0x60" out="0x20-0x80" />
+			<map in="0xD0">0x20</map>
+			<map in="0xE2">0x09</map>
+			<map in="0xE3">0x2C</map>
+			<map in="0xFF">0x00</map>
+			<mapelse>0x3F</mapelse>
+		</lut>
+		<disc offset="0x0EA4" intype="byte" />
+		<location offset="0x0F0C" intype="string" lut="ffstring" length="0x20" stringmap />
+		<streamtime type="timer" />
+		<gametime offset="0x0B80" intype="dword" time />
+		<lastevent type="user" utype="textbox" />
+		<mods type="user" utype="list" entry="mod" />
+		<party>
+			<member type="repeat" offset="lut" lut="char" times="3">
+				<name offset="0x10" intype="string" lut="ffstring" length="0x09" stringmap />
+				<level offset="0x01" intype="byte" />
+			</member>
+		</party>
+	</rel>
+</memlayout>
