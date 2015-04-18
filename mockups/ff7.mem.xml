@@ -5,6 +5,11 @@
 
 	Input/output types are one of offset, byte, string, word, 
 	or dword.
+
+	Two LUTs can be given for one tag, for the offset and the value respectively.
+	If referring to an offset LUT outside of a repeat, one can refer to a specific 
+	input offset by following the LUT specification with a colon and an array index
+	(beginning at 0)
 	
     <lut tag="tagname" type="offset" input="0x4F8,0x4F9,0x4Fa" intype="byte">
         Specifies a 'look up table', where the value of one
@@ -17,8 +22,21 @@
 		another. 
 		
 	<map in="input">output</map>
-		Used in both kinds of LUT, maps an input to an output.
+		Used in both kinds of LUT, maps an input to an output. One input
+		can map to more than one output in sequence. This is mostly
+		useful in stringmapped LUTs, where an LF can be turned into a 
+		CRLF, for example. In non-string references, only a single 
+		output can be given, so the first choice is
+		assumed.
 	
+	<mapstring in="input" length="length" lut="lut">output</mapstring>
+		Used in a stringmap table, maps a single value to an entire string of
+		specified length by offset, optionally using a LUT. And yes, you can 
+		recurse. If two LUT's are specified.
+	
+	<mapstring in="input">Blah</mapstring>
+		The above, except to a literal.
+		
 	<maprange in="0x00-0x60" out="0x20-0x80" />
 		Maps a whole range of values to another range of values,
 		linearly. If out is a single value, the entire range is
@@ -86,28 +104,75 @@
 		
 -->
 <memlayout>
-	<rel offset="0x00DBFD38">
-		<lut tag="char" type="offset" input="0x04F8,0x04F9,0x04FA" intype="byte">
-            <map input="0x00">0x0054</map>
-            <map input="0x01">0x00D8</map>
-            <map input="0x02">0x015C</map>
-            <map input="0x03">0x01E0</map>
-            <map input="0x04">0x0264</map>
-            <map input="0x05">0x02E8</map>
-            <map input="0x06">0x036C</map>
-            <map input="0x07">0x03F0</map>
-            <map input="0x08">0x0474</map>
-            <map input="0x09">0x036C</map>
-            <map input="0x0A">0x03F0</map>
+	<rel offset="0x00DBFD38"> <!-- FF7 SaveMap Address -->
+		<lut tag="char" type="offset" input="0x04F8,0x04F9,0x04FA" intype="byte"> <!-- Character Records -->
+            <map input="0x00">0x0054</map> <!-- Cloud -->
+            <map input="0x01">0x00D8</map> <!-- Barrett -->
+            <map input="0x02">0x015C</map> <!-- Tifa -->
+            <map input="0x03">0x01E0</map> <!-- Aerith -->
+            <map input="0x04">0x0264</map> <!-- Red XIII -->
+            <map input="0x05">0x02E8</map> <!-- Yuffie -->
+            <map input="0x06">0x036C</map> <!-- Cait Sith -->
+            <map input="0x07">0x03F0</map> <!-- Vincent -->
+            <map input="0x08">0x0474</map> <!-- Cid -->
+            <map input="0x09">0x036C</map> <!-- Young Cloud (shares record with Cait Sith -->
+            <map input="0x0A">0x03F0</map> <!-- Sephiroth (shares record with Vincent) -->
             <mapelse>noentry</mapelse>
 		</lut>
-		<lut tag="ffstring" type="value" in="byte" out="byte">
-			<maprange in="0x00-0x60" out="0x20-0x80" />
-			<map in="0xD0">0x20</map>
-			<map in="0xE2">0x09</map>
-			<map in="0xE3">0x2C</map>
-			<map in="0xFF">0x00</map>
-			<mapelse>0x3F</mapelse>
+		<lut tag="ffstring" type="value" in="byte" out="byte"> <!-- Translate FF7 style strings to ASCII strings. Mostly just a straight offset of add 32 to the input.-->
+			<maprange in="0x00-0x60" out="0x20-0x80" /> <!-- Maps directly to ASCII printables. -->
+			<map in="0x88">0xA9</map> <!-- Registered trademark -->
+			<map in="0x89">0xB8</map> <!-- Copyright -->
+			<map in="0x8A">0x84,0x77</map> <!-- Unregistered trademark -->
+			<map in="0x8B">0x27</map> <!-- Singlequote -->
+			<map in="0xBC">0x22</map> <!-- Quote -->
+			<map in="0xA9">0x2E,0x2E,0x2E</map> <!-- A9 is an ellipsis. -->
+			<map in="0xAA">noentry</map> <!-- AA is nothing -->
+			<map in="0xB2">0x22</map> <!-- Open quote. As we're mapping to ASCII, simply a quote. -->
+			<map in="0xB3">0x22</map> <!-- End quote. See above -->
+			<map in="0xB4">0x27</map> <!-- Open singlequote. Mapped to an apostrophe because ASCII -->
+			<map in="0xB5">0x27</map> <!-- End singlequote. -->
+			<map in="0xBA">0x2F</map> <!-- Forward slash -->
+			<map in="0xBC">0x3C</map> <!-- Less than sign -->
+			<map in="0xBD">0x3E</map> <!-- Greater than sign -->
+			<map in="0xC2">0x2C</map> <!-- Comma -->
+			<map in="0xC3">0x22</map> <!-- End quote -->
+			<map in="0xD0">0x20</map> <!-- Space -->
+			<map in="0xE0">0x3F</map> <!-- Choice. As we can't represent that, print a question mark. -->
+			<map in="0xE1">0x09</map> <!-- Tab -->
+			<map in="0xE2">0x2C</map> <!-- Comma -->
+			<map in="0xE3">0x2E,0x22</map> <!-- 2E is a period followed by a quote -->
+			<map in="0xE7">0x0D,0x0A</map> <!-- E7 is a newline, here mapped to CRLF -->
+			<map in="0xFF">0x00</map> <!-- FF is end-of-string, in C (and here) strings are null terminated. -->
+			<mapstring in="0xEA" length="0x09" lut="ffstring">0x0064</mapstring> <!-- EA is to be replaced by Cloud's name. -->
+			<mapstring in="0xEB" length="0x09" lut="ffstring">0x00E8</mapstring> <!-- As above, Barrett -->
+			<mapstring in="0xEC" length="0x09" lut="ffstring">0x016C</mapstring> <!-- Tifa -->
+			<mapstring in="0xED" length="0x09" lut="ffstring">0x01F0</mapstring> <!-- Aerith -->
+			<mapstring in="0xEE" length="0x09" lut="ffstring">0x0274</mapstring> <!-- Red XIII -->
+			<mapstring in="0xEF" length="0x09" lut="ffstring">0x02F8</mapstring> <!-- Yuffie -->
+			<mapstring in="0xF0" length="0x09" lut="ffstring">0x037C</mapstring> <!-- Cait Sith -->
+			<mapstring in="0xF1" length="0x09" lut="ffstring">0x0400</mapstring> <!-- Vincent -->
+			<mapstring in="0xF2" length="0x09" lut="ffstring">0x0484</mapstring> <!-- Cid -->
+			<mapstring in="0xF3" length="0x09" lut="char:0" lut="ffstring">0x10</mapstring> <!-- F3 is to be replaced by the name of the first party member -->
+			<mapstring in="0xF4" length="0x09" lut="char:1" lut="ffstring">0x10</mapstring> <!-- As above, Second party member -->
+			<mapstring in="0xF5" length="0x09" lut="char:2" lut="ffstring">0x10</mapstring> <!-- Third party member -->
+			<mapstring in="0xF6">[Circle]</mapstring> <!-- These are supposed to be symbols, but there is no equivalent in ASCII -->
+			<mapstring in="0xF7">[Triangle]</mapstring>
+			<mapstring in="0xF8">[Square]</mapstring>
+			<mapstring in="0xF9">[Cross]</mapstring>
+			<!-- Alternate versions for PC 
+			<mapstring in="0xF6">[OK]</mapstring>
+			<mapstring in="0xF7">[MENU]</mapstring>
+			<mapstring in="0xF8">[SWITCH]</mapstring>
+			<mapstring in="0xF9">[CANCEL]</mapstring>
+			or, for default controls
+			<mapstring in="0xF6">[NUMENTER]</mapstring>
+			<mapstring in="0xF7">[NUMPLUS]</mapstring>
+			<mapstring in="0xF8">[NUMDEL]</mapstring>
+			<mapstring in="0xF9">[NUMINS]</mapstring>
+			-->
+			<!-- No bloody clue what to do with 0xFE, I assume by "FUNC" it means call a script function, which isn't useful for display/output. -->
+			<mapelse>0x3F</mapelse> <!-- Map any international characters to a question mark -->
 		</lut>
 		<disc offset="0x0EA4" intype="byte" />
 		<location offset="0x0F0C" intype="string" lut="ffstring" length="0x20" stringmap />
