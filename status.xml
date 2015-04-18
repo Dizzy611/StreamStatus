@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<status>
+  <disc>1</disc>
+  <location>Mako Reactor 1</location>
+  <streamtime>00:00:00</streamtime>
+  <gametime>00:00:00</gametime>
+  <lastevent>Just loaded up the game.</lastevent>
+  <mods>
+    <mod>Reunion R03b</mod>
+    <mod>7thHeaven Tifa's Final Heaven</mod>
+    <mod>Team Avalanche Fields</mod>
+  </mods>
+  <party>
+    <member>
+      <name>Cloud</name>
+      <level>7</level>
+    </member>
+    <member>
+      <name>Barrett</name>
+      <level>8</level>
+    </member>
+  </party>
+</status>

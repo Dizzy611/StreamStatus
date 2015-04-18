@@ -1,0 +1,1 @@
+I do not have license to the fonts I used myself in this project. However, I used Microsoft Verdana, Microsoft Constantia, and Microsoft Sans TTF, which can be easily retrieved from your windows installation.

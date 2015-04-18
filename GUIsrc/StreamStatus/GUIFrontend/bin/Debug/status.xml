@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<status>
+  <disc>1</disc>
+  <location>The Golden Saucer</location>
+  <timestarted>1428271812</timestarted>
+  <gametime>16402</gametime>
+  <lastevent>Cait Sith just fucked us over</lastevent>
+  <mods>Reunion R03b, 7thHeaven</mods>
+  <party>
+    <member>
+      <name>Cloud</name>
+      <level>12</level>
+    </member>
+    <member>
+      <name>Tifa</name>
+      <level>15</level>
+    </member>
+    <member>
+      <name>Barrett</name>
+      <level>20</level>
+    </member>
+  </party>
+</status>

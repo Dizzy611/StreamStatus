@@ -1,0 +1,64 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+WindowsApplication1
+</name>
+</assembly>
+<members>
+<member name="P:WindowsApplication1.NativeMemoryReader.TargetProcess">
+	<summary>
+ The process that memory will be read from when ReadMemory is called
+ </summary>
+</member><member name="P:WindowsApplication1.NativeMemoryReader.TargetProcessHandle">
+	<summary>
+ The handle to the process that was retrieved during the constructor or the last
+ successful call to the Open method
+ </summary>
+</member><member name="M:WindowsApplication1.NativeMemoryReader.ReadMemory(System.IntPtr,System.Int32)">
+	<summary>
+ Reads the specified number of bytes from an address in the process's memory.
+ All memory in the specified range must be available or the method will fail.
+ Returns Nothing if the method fails for any reason
+ </summary>
+	<param name="MemoryAddress">The address in the process's virtual memory to start reading from</param>
+	<param name="Count">The number of bytes to read</param>
+</member><member name="M:WindowsApplication1.NativeMemoryReader.Open">
+	<summary>
+ Gets a handle to the process specified in the TargetProcess property.
+ A handle is automatically obtained by the constructor of this class but if the Close
+ method has been called to close a previously obtained handle then another handle can
+ be obtained by calling this method. If a handle has previously been obtained and Close has
+ not been called yet then an exception will be thrown.
+ </summary>
+</member><member name="M:WindowsApplication1.NativeMemoryReader.Close">
+	<summary>
+ Closes a handle that was previously obtained by the constructor or a call to the Open method
+ </summary>
+</member><member name="M:WindowsApplication1.NativeMemoryReader.#ctor(System.Diagnostics.Process)">
+	<summary>
+ Creates a new instance of the NativeMemoryReader class and attempts to get a handle to the
+ process that is to be read by calls to the ReadMemory method.
+ If a handle cannot be obtained then an exception is thrown
+ </summary>
+	<param name="ProcessToRead">The process that memory will be read from</param>
+</member><member name="M:WindowsApplication1.NativeMemoryReader.Dispose">
+	<summary>
+ Releases resources and closes any process handles that are still open
+ </summary>
+</member><member name="P:WindowsApplication1.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:WindowsApplication1.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:WindowsApplication1.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

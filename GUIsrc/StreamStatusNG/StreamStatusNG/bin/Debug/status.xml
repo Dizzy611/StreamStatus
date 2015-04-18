@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<status>
+  <disc>1</disc>
+  <location>Shin-Ra Mansion,1F</location>
+  <streamtime>00:01:28</streamtime>
+  <gametime>09:15:59</gametime>
+  <lastevent>Nothing much.</lastevent>
+  <mods>
+    <mod>Reunion R03b</mod>
+    <mod>7thHeaven Tifa's Final Heaven</mod>
+    <mod>Team Avalanche Fields</mod>
+  </mods>
+  <party>
+    <member>
+      <name>Cloud</name>
+      <level>1</level>
+    </member>
+  </party>
+</status>
