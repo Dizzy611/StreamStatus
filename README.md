@@ -6,4 +6,4 @@ into hooking and memory reading so as to grab the data live. As of this writing 
 is to create a generic overlay system for twitch streams, potentially including a direct OBS plugin
 instead of the use of browser support, as well as layout tables and tables of memory addresses for different games.
 This is currently planned for future, and as of this writing the code here is best suited for streaming Final Fantasy 7.
-This code can be freely distributed and modified. See the COPYING file for details.
+This code can be freely distributed and modified. See the LICENSE file for details.
