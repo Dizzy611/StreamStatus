@@ -1,3 +1,8 @@
+#NeonLightning's Edits
+well i changed a bunch i can't really rememember what right now. the original i couldn't get working so in the process
+of trying to figure out how i did some changes. and those just kept going. i hope to merge this but i doubt they will.
+(mostly because i have no idea what i'm doing)
+one thing to note that i didn't realize is the resolution for the overlay is mostly based on the image size
 # StreamStatus
 My stream overlay project, designed for my Final Fantasy 7 streaming. An unholy combination of VB, PHP, and JavaScript.
 This project was originally developed to provide an interesting and eye catching overlay

@@ -165,7 +165,6 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.Weapon(0) = "None"
             myXMLInput.PartyLevels(0) = 0
         End If
-        myXMLInput.LastEvent = committedLastEvent
         XmlWrite(myXMLInput)
 
     End Sub
