@@ -148,9 +148,6 @@ Public Class StatusUpdateGUIFrontend
             ReDim myXMLInput.BaseHP(numParty - 1)
             For myIterator As Byte = 0 To (numParty - 1)
                 myXMLInput.PartyNames(myIterator) = mySaveMap.LiveParty(myIterator).Name
-                If String.Compare(myXMLInput.Weapon(myIterator), "0") = 0 Then
-                    myXMLInput.Weapon(numParty - 1) = "buster"
-                End If
                 myXMLInput.Weapon(myIterator) = mySaveMap.LiveParty(myIterator).Weapon
                 myXMLInput.HP(myIterator) = mySaveMap.LiveParty(myIterator).HP
                 myXMLInput.BaseHP(myIterator) = mySaveMap.LiveParty(myIterator).BaseHP
