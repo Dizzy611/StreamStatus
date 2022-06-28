@@ -14,7 +14,7 @@
 
 
 // Set font filename
-$font = 'font/verdana.ttf';
+$font = 'D:\xampp\htdocs\streamstatus\font\verdana.ttf';
 
 // Function to log a line to a file.
 function logIt($logstring) {
@@ -30,11 +30,11 @@ function pxtoPt($pixels) {
 // Function to print an error to an image, link the image, and then die. Contains a small subset of this program within it.
 // Code fast, compile young, and leave a beautifulCorpse(). Needs to be less than 24 characters!
 function beautifulCorpse($string) {
-    $font = 'font/micross.ttf';
+    $font = 'D:\xampp\htdocs\streamstatus\font\verdana.ttf';
     $errimg = imagecreatefrompng("base/background.png");
     imagesavealpha($errimg, TRUE);
     $ercolor = imagecolorallocatealpha($errimg, 255, 255, 255, 0);
-    imagettftext($errimg, pxtoPt(18), 0, 25, 30, $ercolor, $font, $string);
+    imagettftext($errimg, pxtoPt(16), 0, 25, 30, $ercolor, $font, $string);
     imagepng($errimg, "error.png", 0, NULL);
     $myurl=$_SERVER['REQUEST_URI'];
     $temparray = explode("/", $myurl);
@@ -182,25 +182,25 @@ $black = imagecolorallocatealpha($img, 0, 0, 0, 0);
 $white = imagecolorallocatealpha($img, 255, 255, 255, 0);
 
 // Get the length of a space
-$spacebbox = imagettfbbox(pxtoPt(18), 0, $font, " ");
+$spacebbox = imagettfbbox(pxtoPt(16), 0, $font, " ");
 $spacelen = $spacebbox[2] - $spacebbox[0];
 // Get the ideal max character name length
-$charbbox = imagettfbbox(pxtoPt(18), 0, $font, "Sephiroth");
+$charbbox = imagettfbbox(pxtoPt(16), 0, $font, "Sephiroth");
 $charlen = $charbbox[2] - $charbbox[0];
 // Get the ideal max length of the lastevent/mod lines (number of characters calculated using trial and error :/)
-$wrapbbox = imagettfbbox(pxtoPt(18), 0, $font, "AAAAAAAAAAAAAAAAAA");
+$wrapbbox = imagettfbbox(pxtoPt(16), 0, $font, "AAAAAAAAAAAAAAAAAA");
 $wraplen = $wrapbbox[2] - $wrapbbox[0];
 
 /* Add our text */
 $outstring = "";
 // Disc
-$outstring = $outstring . "Disc " . $disc . "/3\n\n";
+$outstring = $outstring . ".\n\nDisc " . $disc . "/3\n\n";
 
 // Party
 $outstring = $outstring . "Party:\n    ";
 $nummems = 0;
 foreach ($members as $member) {
-	$namebbox = imagettfbbox(pxtoPt(18), 0, $font, $member->name);
+	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
 	$namelen = $namebbox[2] - $namebbox[0];
 	if ($namelen < $charlen) {
 		$namestr = $member->name;
@@ -215,7 +215,8 @@ foreach ($members as $member) {
 	} else {
 		$namestr = $member->name;
 	}
-    $outstring = $outstring . $namestr . " - L" . $member->level . "\n    ";
+    $outstring = $outstring . $namestr . " " . "L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
+	$outstring = $outstring . "- Wep " . $member->weapon . "\n   ";
 }
 $outstring = $outstring . "\n";
 
@@ -224,21 +225,13 @@ $outstring = $outstring . "\n";
 // Location
 $outstring = $outstring . "Location:\n    " . $location . "\n\n";
 
-// Last Event
-$outstring = $outstring . "When we left off:\n";
-$wrapevent = fullWrap($lastevent, $wraplen, $font, pxtoPt(18));
-foreach ($wrapevent as $line) {
-	$outstring = $outstring . "    " . $line . "\n";
-}
-$outstring = $outstring . "\n";
-
 // Time
 $outstring = $outstring . "Time:\n";
-$ingamebbox = imagettfbbox(pxtoPt(18), 0, $font, "In-Game");
+$ingamebbox = imagettfbbox(pxtoPt(16), 0, $font, "In-Game");
 $ingamelen = $ingamebbox[2] - $ingamebbox[0];
-$streambbox = imagettfbbox(pxtoPt(18), 0, $font, "Stream");
+$streambbox = imagettfbbox(pxtoPt(16), 0, $font, "Stream");
 $streamlen = $streambbox[2] - $streambbox[0];
-$localbbox = imagettfbbox(pxtoPt(18), 0, $font, "Local");
+$localbbox = imagettfbbox(pxtoPt(16), 0, $font, "Local");
 $locallen = $localbbox[2] - $localbbox[0];
 $streamdiff = $ingamelen - $streamlen;
 $localdiff = $ingamelen - $locallen;
@@ -258,30 +251,30 @@ $outstring = $outstring . "   In-Game - " . $gametime . "\n\n";
 
 // Mods
 $outstring = $outstring . "Mods:\n";
-foreach ($mods as $mod) {
-	$wrapmod = fullWrap($mod, $wraplen, $font, pxtoPt(18));
-	$i = 0;
-	foreach ($wrapmod as $line) {
-		if ($i = 0) {
-			$outstring = $outstring . "   - ";
-		} else {
-			$outstring = $outstring . "     ";
-		}
-		$outstring = $outstring . $line . "\n";
-		$i = $i = 1;
-	}
-}
+$outstring = $outstring . "-Custom Random Battle/Fanfare\n";
+$outstring = $outstring . "-Custom Soundtrack\n";
+$outstring = $outstring . "-Cosmo Memory\n";
+$outstring = $outstring . "-60 FPS Gameplay(and NT addon)\n";
+$outstring = $outstring . "-Ninostyle Models(dyn+chibi)\n";
+$outstring = $outstring . "-Avalanche Arisen Battle Textures\n";
+$outstring = $outstring . "-SYW Field Textures\n";
+$outstring = $outstring . "-New Threat 2.0\n";
+$outstring = $outstring . "-SYW Minigame Textures\n";
+$outstring = $outstring . "-SYW Spell Textures\n";
+$outstring = $outstring . "-Finishing Touch\n";
+$outstring = $outstring . "-Enhanced Stock UI\n";
+$outstring = $outstring . "-SYW Worldmap Textures\n\n";
  
 // Trim any leading/trailing newlines or etc from output string
 $outstring = trim($outstring);
 
 // And output! Now with hacky drop shadow.
 // First, center it.
-$bounding = imagettfbbox(pxtoPt(18), 0, $font, $outstring);
+$bounding = imagettfbbox(pxtoPt(16), 0, $font, $outstring);
 $height = $bounding[1] - $bounding[7];
 $topy = 360 - ($height/2);
-imagettftext($img, pxtoPt(18), 0, 27, $topy+2, $black, $font, $outstring);
-imagettftext($img, pxtoPt(18), 0, 25, $topy, $white, $font, $outstring);
+imagettftext($img, pxtoPt(16), 0, 27, $topy+2, $black, $font, $outstring);
+imagettftext($img, pxtoPt(16), 0, 25, $topy, $white, $font, $outstring);
 
 // Delete any PNGs still in the directory, and output our image
 array_map('unlink', glob("*.png"));

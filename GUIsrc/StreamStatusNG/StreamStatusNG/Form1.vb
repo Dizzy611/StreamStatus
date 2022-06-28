@@ -12,7 +12,6 @@ Public Class StatusUpdateGUIFrontend
     Dim FF7Process As Process
     Dim mySaveMap As FF7SaveMap
     Dim MemRead As NativeMemoryReader
-    Dim committedMods As String() = {"None"}
     Dim committedLastEvent As String = "None"
     Structure WriterInput
         Public Disc As Byte
@@ -20,13 +19,15 @@ Public Class StatusUpdateGUIFrontend
         Public StreamTime As String
         Public GameTime As String
         Public LastEvent As String
-        Public Mods As String()
         Public PartyNames As String()
         Public PartyLevels As String()
+        Public Weapon As String()
+        Public HP As String()
+        Public BaseHP As String()
     End Structure
 
 #End Region
-    
+
 #Region "Internal Functions"
 
     Private Sub UpdateStatus()
@@ -65,17 +66,15 @@ Public Class StatusUpdateGUIFrontend
                 writer.WriteElementString("streamtime", Input.StreamTime)          '    <timestarted>1428292404</timestarted>
                 writer.WriteElementString("gametime", Input.GameTime)              '    <gametime>79324</gametime>
                 writer.WriteElementString("lastevent", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
-                writer.WriteStartElement("mods")                                   '    <mods>
-                For Each myMods In Input.Mods
-                    writer.WriteElementString("mod", myMods)                       '        <mod>Reunion R03b</mod>
-                Next
-                writer.WriteEndElement()                                           '    </mods>
                 writer.WriteStartElement("party")                                  '    <party>
                 Dim Index As Byte = 0
                 For Each myName In Input.PartyNames
                     writer.WriteStartElement("member")                             '        <member>
                     writer.WriteElementString("name", myName)                      '            <name>Blah</name>
+                    writer.WriteElementString("hp", Input.HP(Index).ToString())                      '            <hp>6969</hp>
+                    writer.WriteElementString("basehp", Input.BaseHP(Index).ToString())                      '            <basehp>6969</basehp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
+                    writer.WriteElementString("weapon", Input.Weapon(Index).ToString())                   '            <weapon>Blah</weapon>
                     writer.WriteEndElement()                                       '        </member>
                     Index = Index + 1
                 Next
@@ -143,18 +142,32 @@ Public Class StatusUpdateGUIFrontend
         Party.Text = TempStr
         If numParty > 0 Then
             ReDim myXMLInput.PartyNames(numParty - 1)
+            ReDim myXMLInput.Weapon(numParty - 1)
             ReDim myXMLInput.PartyLevels(numParty - 1)
+            ReDim myXMLInput.HP(numParty - 1)
+            ReDim myXMLInput.BaseHP(numParty - 1)
             For myIterator As Byte = 0 To (numParty - 1)
                 myXMLInput.PartyNames(myIterator) = mySaveMap.LiveParty(myIterator).Name
+                If String.Compare(myXMLInput.Weapon(myIterator), "0") = 0 Then
+                    myXMLInput.Weapon(numParty - 1) = "buster"
+                End If
+                myXMLInput.Weapon(myIterator) = mySaveMap.LiveParty(myIterator).Weapon
+                myXMLInput.HP(myIterator) = mySaveMap.LiveParty(myIterator).HP
+                myXMLInput.BaseHP(myIterator) = mySaveMap.LiveParty(myIterator).BaseHP
                 myXMLInput.PartyLevels(myIterator) = mySaveMap.LiveParty(myIterator).Level
             Next
         Else
             ReDim myXMLInput.PartyNames(0)
+            ReDim myXMLInput.Weapon(0)
             ReDim myXMLInput.PartyLevels(0)
+            ReDim myXMLInput.HP(0)
+            ReDim myXMLInput.BaseHP(0)
             myXMLInput.PartyNames(0) = "None"
+            myXMLInput.BaseHP(0) = 0
+            myXMLInput.HP(0) = 0
+            myXMLInput.Weapon(0) = "None"
             myXMLInput.PartyLevels(0) = 0
         End If
-        myXMLInput.Mods = committedMods
         myXMLInput.LastEvent = committedLastEvent
         XmlWrite(myXMLInput)
 
@@ -214,6 +227,7 @@ Public Class StatusUpdateGUIFrontend
         ScreenUpdate()
         Timer1.Enabled = True
     End Sub
+#End Region
 
 
     Private Sub StopButton_Click(sender As Object, e As EventArgs) Handles StopButton.Click
@@ -242,37 +256,6 @@ Public Class StatusUpdateGUIFrontend
         End If
         ScreenUpdate()
     End Sub
-
-    Private Sub CommitChangesButton_Click(sender As Object, e As EventArgs) Handles CommitChangesButton.Click
-        committedLastEvent = LastEvent.Text
-        If Mods.Items.Count = 0 Then
-            ReDim committedMods(0)
-            committedMods(0) = "None"
-        Else
-            ReDim committedMods(Mods.Items.Count - 1)
-            Dim Enumerator As IEnumerator = Mods.Items.GetEnumerator()
-            Dim indexArray As Byte = 0
-            While Enumerator.MoveNext()
-                committedMods(indexArray) = Enumerator.Current.Text
-                indexArray = indexArray + 1
-            End While
-        End If
-    End Sub
-
-#End Region
-
-    Private Sub AddMod_Click(sender As Object, e As EventArgs) Handles AddMod.Click
-        If Not String.IsNullOrWhiteSpace(NewMod.Text) Then
-            Mods.Items.Add(NewMod.Text)
-        End If
-    End Sub
-
-    Private Sub DeleteMod_Click(sender As Object, e As EventArgs) Handles DeleteMod.Click
-        For Each lvi As ListViewItem In Mods.SelectedItems
-            Mods.Items.Remove(lvi)
-        Next
-    End Sub
-
 End Class
 
 Public Class FF7SaveMap
@@ -754,15 +737,15 @@ Public Class NativeMemoryReader : Implements IDisposable
 
 #Region "API Definitions"
 
-    <DllImport("kernel32.dll", EntryPoint:="OpenProcess", SetLastError:=True)> _
+    <DllImport("kernel32.dll", EntryPoint:="OpenProcess", SetLastError:=True)>
     Private Shared Function OpenProcess(ByVal dwDesiredAccess As UInteger, <MarshalAsAttribute(UnmanagedType.Bool)> ByVal bInheritHandle As Boolean, ByVal dwProcessId As UInteger) As IntPtr
     End Function
 
-    <DllImportAttribute("kernel32.dll", EntryPoint:="ReadProcessMemory", SetLastError:=True)> _
+    <DllImportAttribute("kernel32.dll", EntryPoint:="ReadProcessMemory", SetLastError:=True)>
     Private Shared Function ReadProcessMemory(<InAttribute()> ByVal hProcess As System.IntPtr, <InAttribute()> ByVal lpBaseAddress As System.IntPtr, <Out()> ByVal lpBuffer As Byte(), ByVal nSize As UInteger, <OutAttribute()> ByRef lpNumberOfBytesRead As UInteger) As <System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)> Boolean
     End Function
 
-    <DllImport("kernel32.dll", EntryPoint:="CloseHandle", SetLastError:=True)> _
+    <DllImport("kernel32.dll", EntryPoint:="CloseHandle", SetLastError:=True)>
     Private Shared Function CloseHandle(ByVal hObject As IntPtr) As <MarshalAsAttribute(UnmanagedType.Bool)> Boolean
     End Function
 
@@ -842,7 +825,7 @@ Public Class NativeMemoryReader : Implements IDisposable
                 Throw New ApplicationException("Unable to open process for memory reading. The last error reported was: " & New System.ComponentModel.Win32Exception().Message)
             End If
         Else
-            Throw New ApplicationException("A handle to the process has already been obtained, " & _
+            Throw New ApplicationException("A handle to the process has already been obtained, " &
                                            "close the existing handle by calling the Close method before calling Open again")
         End If
     End Sub
@@ -854,7 +837,7 @@ Public Class NativeMemoryReader : Implements IDisposable
         If Not _TargetProcessHandle = IntPtr.Zero Then
             Dim Result As Boolean = CloseHandle(_TargetProcessHandle)
             If Not Result Then
-                Throw New ApplicationException("Unable to close process handle. The last error reported was: " & _
+                Throw New ApplicationException("Unable to close process handle. The last error reported was: " &
                                                New System.ComponentModel.Win32Exception().Message)
             End If
             _TargetProcessHandle = IntPtr.Zero
