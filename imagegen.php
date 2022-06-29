@@ -193,8 +193,33 @@ $wraplen = $wrapbbox[2] - $wrapbbox[0];
 
 /* Add our text */
 $outstring = "";
+// Time
+$outstring = $outstring . "Time:\n";
+$ingamebbox = imagettfbbox(pxtoPt(16), 0, $font, "In-Game");
+$ingamelen = $ingamebbox[2] - $ingamebbox[0];
+$streambbox = imagettfbbox(pxtoPt(16), 0, $font, "Stream");
+$streamlen = $streambbox[2] - $streambbox[0];
+$localbbox = imagettfbbox(pxtoPt(16), 0, $font, "Local");
+$locallen = $localbbox[2] - $localbbox[0];
+$streamdiff = $ingamelen - $streamlen;
+$localdiff = $ingamelen - $locallen;
+$streamspaces = $streamdiff/$spacelen;
+$localspaces = $localdiff/$spacelen;
+$streampad = "";
+$localpad = "";
+foreach (range(1, $streamspaces) as $unused) {
+	$streampad = $streampad . " ";
+}
+foreach (range(1, $localspaces) as $unused) {
+	$localpad = $localpad . " ";
+}
+$outstring = $outstring . "   Local" . $localpad . " - " . date("H:i:s") . "\n";
+$outstring = $outstring . "   Stream" . $streampad . " - " . $streamtime . "\n";
+$outstring = $outstring . "   In-Game - " . $gametime . "\n\n";
 // Disc
-$outstring = $outstring . ".\n\nDisc " . $disc . "/3\n\n";
+$outstring = $outstring . "Disc " . $disc . "/3\n\n";
+// Location
+$outstring = $outstring . "Location:\n    " . $location . "\n\n";
 
 // Party
 $outstring = $outstring . "Party:\n    ";
@@ -219,36 +244,6 @@ foreach ($members as $member) {
 	$outstring = $outstring . "- Wep " . $member->weapon . "\n   ";
 }
 $outstring = $outstring . "\n";
-
-// Same spacing regardless of number of party members
-
-// Location
-$outstring = $outstring . "Location:\n    " . $location . "\n\n";
-
-// Time
-$outstring = $outstring . "Time:\n";
-$ingamebbox = imagettfbbox(pxtoPt(16), 0, $font, "In-Game");
-$ingamelen = $ingamebbox[2] - $ingamebbox[0];
-$streambbox = imagettfbbox(pxtoPt(16), 0, $font, "Stream");
-$streamlen = $streambbox[2] - $streambbox[0];
-$localbbox = imagettfbbox(pxtoPt(16), 0, $font, "Local");
-$locallen = $localbbox[2] - $localbbox[0];
-$streamdiff = $ingamelen - $streamlen;
-$localdiff = $ingamelen - $locallen;
-$streamspaces = $streamdiff/$spacelen;
-$localspaces = $localdiff/$spacelen;
-$streampad = "";
-$localpad = "";
-foreach (range(1, $streamspaces) as $unused) {
-	$streampad = $streampad . " ";
-}
-foreach (range(1, $localspaces) as $unused) {
-	$localpad = $localpad . " ";
-}
-$outstring = $outstring . "   Local" . $localpad . " - " . date("H:i:s") . "\n";
-$outstring = $outstring . "   Stream" . $streampad . " - " . $streamtime . "\n";
-$outstring = $outstring . "   In-Game - " . $gametime . "\n\n";
-
 // Mods
 $outstring = $outstring . "Mods:\n";
 $outstring = $outstring . "-Custom Random Battle/Fanfare\n";
