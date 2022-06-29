@@ -55,6 +55,11 @@ Public Class StatusUpdateGUIFrontend
     End Sub
 
     Private Sub XmlWrite(ByRef Input As WriterInput)
+        Dim WeaponNames() As String = New String(33) {
+        "Buster", "Mythril Saber", "Hardedge", "Butterfly Edge", "Enhance Sword", "Organics", "Crystal Sword", "Force Stealer", "Rune Blade", "Murasame", "Nail Bat", "Yoshiyuki", "Apocalypse", "Heaven's Cloud", "Ragnarok", "Ultima Weapon",
+        "Leather Glove", "Metal Knuckle", "Mythril Claw", "Grand Glove", "Tiger Fang", "Diamond Knuckle", "Dragon Claw", "Crystal Glove", "Motor Drive", "Platinum Fist", "Kaiser Knuckle", "Work Glove", "Powersoul", "Master Fist", "God's Hand", "Premium Heart",
+        "Gatling Gun", "Assault Gun"
+        }
         Dim Settings As XmlWriterSettings = New XmlWriterSettings()
         Settings.Indent = True
         Try
@@ -74,7 +79,8 @@ Public Class StatusUpdateGUIFrontend
                     writer.WriteElementString("hp", Input.HP(Index).ToString())                      '            <hp>6969</hp>
                     writer.WriteElementString("basehp", Input.BaseHP(Index).ToString())                      '            <basehp>6969</basehp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
-                    writer.WriteElementString("weapon", Input.Weapon(Index).ToString())                   '            <weapon>Blah</weapon>
+                    'writer.WriteElementString("weapon", Input.Weapon(Index).ToString())                   '            <weapon>Blah</weapon>
+                    writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
                     writer.WriteEndElement()                                       '        </member>
                     Index = Index + 1
                 Next
