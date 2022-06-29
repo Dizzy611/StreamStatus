@@ -25,8 +25,10 @@ Public Class StatusUpdateGUIFrontend
         Public Armor As String()
         Public Accessory As String()
         Public HP As String()
+        Public MP As String()
         Public LiveGil As Integer
         Public BaseHP As String()
+        Public BaseMP As String()
     End Structure
 
 #End Region
@@ -97,10 +99,11 @@ Public Class StatusUpdateGUIFrontend
                     writer.WriteElementString("name", myName)                      '            <name>Blah</name>
                     writer.WriteElementString("hp", Input.HP(Index).ToString())                      '            <hp>6969</hp>
                     writer.WriteElementString("basehp", Input.BaseHP(Index).ToString())                      '            <basehp>6969</basehp>
+                    writer.WriteElementString("mp", Input.MP(Index).ToString())                      '            <mp>6969</mp>
+                    writer.WriteElementString("basemp", Input.BaseMP(Index).ToString())                      '            <basemp>6969</basemp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
                     writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
                     writer.WriteElementString("armor", ArmorNames(Input.Armor(Index)))    '            <armour>Blah</armour>
-                    'writer.WriteElementString("accessory", Input.Accessory(Index).ToString())
                     writer.WriteElementString("accessory", AccessoryNames(Input.Accessory(Index)))    '            <Accessory>Blah</Accessory>
                     writer.WriteEndElement()                                       '        </member>
                     Index = Index + 1
@@ -179,7 +182,9 @@ Public Class StatusUpdateGUIFrontend
             ReDim myXMLInput.Accessory(numParty - 1)
             ReDim myXMLInput.PartyLevels(numParty - 1)
             ReDim myXMLInput.HP(numParty - 1)
+            ReDim myXMLInput.MP(numParty - 1)
             ReDim myXMLInput.BaseHP(numParty - 1)
+            ReDim myXMLInput.BaseMP(numParty - 1)
             For myIterator As Byte = 0 To (numParty - 1)
                 myXMLInput.PartyNames(myIterator) = mySaveMap.LiveParty(myIterator).Name
                 myXMLInput.Weapon(myIterator) = mySaveMap.LiveParty(myIterator).Weapon
@@ -187,6 +192,8 @@ Public Class StatusUpdateGUIFrontend
                 myXMLInput.Accessory(myIterator) = mySaveMap.LiveParty(myIterator).Accessory
                 myXMLInput.HP(myIterator) = mySaveMap.LiveParty(myIterator).HP
                 myXMLInput.BaseHP(myIterator) = mySaveMap.LiveParty(myIterator).BaseHP
+                myXMLInput.MP(myIterator) = mySaveMap.LiveParty(myIterator).MP
+                myXMLInput.BaseMP(myIterator) = mySaveMap.LiveParty(myIterator).BaseMP
                 myXMLInput.PartyLevels(myIterator) = mySaveMap.LiveParty(myIterator).Level
             Next
         Else
@@ -197,6 +204,8 @@ Public Class StatusUpdateGUIFrontend
             ReDim myXMLInput.PartyLevels(0)
             ReDim myXMLInput.HP(0)
             ReDim myXMLInput.BaseHP(0)
+            ReDim myXMLInput.MP(0)
+            ReDim myXMLInput.BaseMP(0)
             myXMLInput.PartyNames(0) = "None"
             myXMLInput.BaseHP(0) = 0
             myXMLInput.HP(0) = 0
