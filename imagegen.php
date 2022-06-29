@@ -12,9 +12,9 @@
    code is freely available for your use.
 */
 
-
+putenv('GDFONTPATH=' . realpath('.'));
 // Set font filename
-$font = 'D:\xampp\htdocs\streamstatus\font\DejaVuSansMono.ttf';
+$font = './washrasb';
 
 // Function to log a line to a file.
 function logIt($logstring) {
@@ -30,7 +30,7 @@ function pxtoPt($pixels) {
 // Function to print an error to an image, link the image, and then die. Contains a small subset of this program within it.
 // Code fast, compile young, and leave a beautifulCorpse(). Needs to be less than 24 characters!
 function beautifulCorpse($string) {
-    $font = 'D:\xampp\htdocs\streamstatus\font\verdana.ttf';
+    $font = 'c:\xampp\htdocs\streamstatus\font\washrab.ttf';
     $errimg = imagecreatefrompng("base/background.png");
     imagesavealpha($errimg, TRUE);
     $ercolor = imagecolorallocatealpha($errimg, 255, 255, 255, 0);
