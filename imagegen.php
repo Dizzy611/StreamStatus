@@ -225,7 +225,7 @@ $nummems = 0;
 foreach ($members as $member) {
 	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
 	$namelen = $namebbox[2] - $namebbox[0];
-	if ($namelen < $charlen) {
+/* 	if ($namelen < $charlen) {
 		$namestr = $member->name;
 		$diff = $charlen - $namelen;
 		$spaces = $diff/$spacelen;
@@ -239,7 +239,8 @@ foreach ($members as $member) {
 	} else {
 		$namestr = $member->name;
 		
-	}
+	} */
+	$namestr = $member->name;
     $outstring = $outstring . $namestr . " " . "\n  " . "L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
 	$outstring = $outstring . "Wp: " . $member->weapon ."\n Ar:  " . $member->armor . "\n Ac:  ". $member->accessory . "\n";
 	//$outstring = $outstring . "   Armor  " . $member->armor . "\n";
