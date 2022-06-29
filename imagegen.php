@@ -227,6 +227,7 @@ $outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n " . $location . 
 
 // Party
 $outstring = $outstring . "Party:\n ";
+$outstring = $outstring . "Gil " . $status->gil . "\n";
 $nummems = 0;
 foreach ($members as $member) {
 	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
@@ -246,9 +247,8 @@ foreach ($members as $member) {
 		$namestr = $member->name;
 		
 	} */
-	$outstring = $outstring . "Gil " . $status->gil . "\n";
 	$namestr = $member->name;
-    $outstring = $outstring . $namestr . " " . "\n" . " L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
+    $outstring = $outstring . $namestr . " " . "\n" . " L" . $member->level . " HP " . $member->hp . "/" . $member->basehp . " MP " . $member->mp . "/" . $member->basemp . "\n ";
 	$outstring = $outstring . " Wp: " . $member->weapon ."\n  Ar: " . $member->armor . "\n  Ac: ". $member->accessory . "\n";
 	$outstring = $outstring . "\n";
 }
