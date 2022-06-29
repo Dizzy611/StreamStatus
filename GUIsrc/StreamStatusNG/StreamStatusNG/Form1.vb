@@ -78,7 +78,6 @@ Public Class StatusUpdateGUIFrontend
         "Power Wrist", "Protect Vest", "Earring", "Talisman", "Choco Feater", "Amulet", "Champion Belt", "Poison Ring", "Tough Ring", "Circlet", "Star Pendant", "Silver Glasses", "Headband", "Fairy Ring", "Jem Ring", "White Cape", "Sprint Shoes", "Peace Ring", "Ribbon", "Fire Ring", "Ice Ring", "Bolt Ring", "Tetra Elemental", "Safety Bit", "Fury Ring", "Curse Ring", "Protect Ring", "Cat's Bell", "Reflect Ring", "Water Ring", "Sneak Glove", "HypnoCrown",
         "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
         }
-        Input.LiveGil = 0
         Dim Settings As XmlWriterSettings = New XmlWriterSettings()
         Settings.Indent = True
         Try
@@ -201,7 +200,7 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.PartyNames(0) = "None"
             myXMLInput.BaseHP(0) = 0
             myXMLInput.HP(0) = 0
-            myXMLInput.HP(0) = 0
+            myXMLInput.LiveGil = 0
             myXMLInput.Weapon(0) = "None"
             myXMLInput.Accessory(255) = "None"
             myXMLInput.Armor(0) = "None"

@@ -109,6 +109,12 @@ if (isset($status->disc)) {
 } else {
     logIt("ERR: Could not find disc number.");
 }
+if (isset($status->gil)) {
+    $counter = $counter + 1;
+    $gil = $status->gil;
+} else {
+    logIt("ERR: Could not find gil number.");
+}
 if (isset($status->location)) {
     $counter = $counter + 1;
     $location = $status->location;
@@ -215,9 +221,9 @@ foreach (range(1, $localspaces) as $unused) {
 }
 $outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
 //$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
-$outstring = $outstring . "In-Game - " . $gametime . "\n\n";
+$outstring = $outstring . "In-Game - " . $gametime . "\n";
 // Location
-$outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n    " . $location . "\n\n";
+$outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n " . $location . "\n";
 
 // Party
 $outstring = $outstring . "Party:\n ";
@@ -240,6 +246,7 @@ foreach ($members as $member) {
 		$namestr = $member->name;
 		
 	} */
+	$outstring = $outstring . "Gil " . $status->gil . "\n";
 	$namestr = $member->name;
     $outstring = $outstring . $namestr . " " . "\n" . " L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
 	$outstring = $outstring . " Wp: " . $member->weapon ."\n  Ar: " . $member->armor . "\n  Ac: ". $member->accessory . "\n";
