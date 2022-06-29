@@ -22,6 +22,8 @@ Public Class StatusUpdateGUIFrontend
         Public PartyNames As String()
         Public PartyLevels As String()
         Public Weapon As String()
+        Public Armor As String()
+        Public Accessory As String()
         Public HP As String()
         Public BaseHP As String()
     End Structure
@@ -35,7 +37,7 @@ Public Class StatusUpdateGUIFrontend
             Case 255
                 Status.Text = "Stopped"
             Case 254
-                Status.Text = "ERROR"
+                Status.Text = "none"
             Case 0
                 Status.Text = "Running"
                 StatusBar = StatusBar + 1
@@ -55,7 +57,7 @@ Public Class StatusUpdateGUIFrontend
     End Sub
 
     Private Sub XmlWrite(ByRef Input As WriterInput)
-        Dim WeaponNames() As String = New String() {
+        Dim WeaponNames() As String = New String(126) {
         "Buster", "Mythril Saber", "Hardedge", "Butterfly Edge", "Enhance Sword", "Organics", "Crystal Sword", "Force Stealer", "Rune Blade", "Murasame", "Nail Bat", "Yoshiyuki", "Apocalypse", "Heaven's Cloud", "Ragnarok", "Ultima Weapon",
         "Leather Glove", "Metal Knuckle", "Mythril Claw", "Grand Glove", "Tiger Fang", "Diamond Knuckle", "Dragon Claw", "Crystal Glove", "Motor Drive", "Platinum Fist", "Kaiser Knuckle", "Work Glove", "Powersoul", "Master Fist", "God's Hand", "Premium Heart",
         "Gatling Gun", "Assault Gun", "Cannon Ball", "Atomic Scissors", "Heavy Vulcan", "Chainsaw", "Microlaser", "A-M Cannon", "W Machine Gun", "Drill Arm", "Solid Bazooka", "Rocket Punch", "Enemy Launcher", "Pile Banger", "Max Ray", "Missing Score",
@@ -66,6 +68,14 @@ Public Class StatusUpdateGUIFrontend
         "Yellow M-phone", "Green M-phone", "Blue M-phone", "Red M-phone", "Crystal M-phone", "White M-phone", "Black M-phone", "Silver M-phone", "Trumpet Shell", "Gold M-Phone", "Battle Trumpet", "Starlight Phone", "HP Shout",
         "Quicksilver", "Shotgun", "Shortbarrel", "Lariat", "Winchester", "Peacemaker", "Buntline", "Long Barrel R", "Silver Rifle", "Sniper CR", "Supershot ST", "Outsider", "Death Penalty",
         "Masamune"
+        }
+        Dim ArmorNames() As String = New String(255) {
+        "Bronze Bangle", "Iron Bangle", "Titan Bangle", "Mythril Armlet", "Carbon Bangle", "Silver Armlet", "Gold Armlet", "Diamond Bangle", "Crystal Bangle", "Platinum Bangle", "Rune Armlet", "Edincoat", "Wizard Bracelet", "Adaman Bangle", "Gigas Armlet", "Imperial Guard", "Aegis Armlet", "Fourth Bracelet", "Warrior Bangle", "Shinra Beta", "Shinra Alpha", "Four Slots", "Fire Armlet", "Aurora Armlet", "Bolt Armlet", "Dragon Armlet", "Minerva Band", "Escort Guard", "Mystile", "Ziedrich", "Precious Watch", "Chocobracelet",
+        "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none""none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none""none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none""none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
+        }
+        Dim AccessoryNames() As String = New String(255) {
+        "Power Wrist", "Protect Vest", "Earring", "Talisman", "Choco Feater", "Amulet", "Champion Belt", "Poison Ring", "Tough Ring", "Circlet", "Star Pendant", "Silver Glasses", "Headband", "Fairy Ring", "Jem Ring", "White Cape", "Sprint Shoes", "Peace Ring", "Ribbon", "Fire Ring", "Ice Ring", "Bolt Ring", "Tetra Elemental", "Safety Bit", "Fury Ring", "Curse Ring", "Protect Ring", "Cat's Bell", "Reflect Ring", "Water Ring", "Sneak Glove", "HypnoCrown",
+        "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
         }
         Dim Settings As XmlWriterSettings = New XmlWriterSettings()
         Settings.Indent = True
@@ -86,8 +96,10 @@ Public Class StatusUpdateGUIFrontend
                     writer.WriteElementString("hp", Input.HP(Index).ToString())                      '            <hp>6969</hp>
                     writer.WriteElementString("basehp", Input.BaseHP(Index).ToString())                      '            <basehp>6969</basehp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
-                    'writer.WriteElementString("weapon", Input.Weapon(Index).ToString())                   '            <weapon>Blah</weapon>
                     writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
+                    writer.WriteElementString("armor", ArmorNames(Input.Armor(Index)))    '            <armour>Blah</armour>
+                    'writer.WriteElementString("accessory", Input.Accessory(Index).ToString())
+                    writer.WriteElementString("accessory", AccessoryNames(Input.Accessory(Index)))    '            <Accessory>Blah</Accessory>
                     writer.WriteEndElement()                                       '        </member>
                     Index = Index + 1
                 Next
@@ -156,12 +168,16 @@ Public Class StatusUpdateGUIFrontend
         If numParty > 0 Then
             ReDim myXMLInput.PartyNames(numParty - 1)
             ReDim myXMLInput.Weapon(numParty - 1)
+            ReDim myXMLInput.Armor(numParty - 1)
+            ReDim myXMLInput.Accessory(numParty - 1)
             ReDim myXMLInput.PartyLevels(numParty - 1)
             ReDim myXMLInput.HP(numParty - 1)
             ReDim myXMLInput.BaseHP(numParty - 1)
             For myIterator As Byte = 0 To (numParty - 1)
                 myXMLInput.PartyNames(myIterator) = mySaveMap.LiveParty(myIterator).Name
                 myXMLInput.Weapon(myIterator) = mySaveMap.LiveParty(myIterator).Weapon
+                myXMLInput.Armor(myIterator) = mySaveMap.LiveParty(myIterator).Armor
+                myXMLInput.Accessory(myIterator) = mySaveMap.LiveParty(myIterator).Accessory
                 myXMLInput.HP(myIterator) = mySaveMap.LiveParty(myIterator).HP
                 myXMLInput.BaseHP(myIterator) = mySaveMap.LiveParty(myIterator).BaseHP
                 myXMLInput.PartyLevels(myIterator) = mySaveMap.LiveParty(myIterator).Level
@@ -169,6 +185,8 @@ Public Class StatusUpdateGUIFrontend
         Else
             ReDim myXMLInput.PartyNames(0)
             ReDim myXMLInput.Weapon(0)
+            ReDim myXMLInput.Armor(0)
+            ReDim myXMLInput.Accessory(0)
             ReDim myXMLInput.PartyLevels(0)
             ReDim myXMLInput.HP(0)
             ReDim myXMLInput.BaseHP(0)
@@ -176,6 +194,8 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.BaseHP(0) = 0
             myXMLInput.HP(0) = 0
             myXMLInput.Weapon(0) = "None"
+            myXMLInput.Accessory(255) = "None"
+            myXMLInput.Armor(0) = "None"
             myXMLInput.PartyLevels(0) = 0
         End If
         XmlWrite(myXMLInput)
@@ -578,7 +598,7 @@ Public Class FF7SaveMap
             Case Else
                 Return "Invalid Value"
         End Select
-        Return "Error"
+        Return "none"
     End Function
 
     Private Function GetCharOffset(ByVal ID As Byte) As Int16
