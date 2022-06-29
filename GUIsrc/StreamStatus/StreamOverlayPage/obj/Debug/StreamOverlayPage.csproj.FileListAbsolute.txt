@@ -1,6 +1,0 @@
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\bin\StreamOverlayPage.dll.config
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\bin\StreamOverlayPage.dll
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\bin\StreamOverlayPage.pdb
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\obj\Debug\StreamOverlayPage.csprojResolveAssemblyReference.cache
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\obj\Debug\StreamOverlayPage.dll
-C:\Users\dmorrison\Documents\Visual Studio 2013\Projects\StreamStatus\StreamOverlayPage\obj\Debug\StreamOverlayPage.pdb
