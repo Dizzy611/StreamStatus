@@ -269,8 +269,8 @@ $outstring = trim($outstring);
 // First, center it.
 $bounding = imagettfbbox(pxtoPt(12), 0, $font, $outstring);
 //$height = $bounding[1] - $bounding[7];
-$height = $bounding[1];
-$topy = 360 - ($height/2);
+$height = 900;
+$topy = 31;
 imagettftext($img, pxtoPt(12), 0, 27, $topy+2, $black, $font, $outstring);
 imagettftext($img, pxtoPt(12), 0, 25, $topy, $white, $font, $outstring);
 
