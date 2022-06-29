@@ -34,6 +34,10 @@ Partial Class StatusUpdateGUIFrontend
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Party = New System.Windows.Forms.Label()
         Me.Location = New System.Windows.Forms.Label()
+        Me.LastEvent = New System.Windows.Forms.TextBox()
+        Me.LastEventLabel = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.CommitChangesButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'DiscNum
@@ -138,11 +142,53 @@ Partial Class StatusUpdateGUIFrontend
         Me.Location.Size = New System.Drawing.Size(0, 13)
         Me.Location.TabIndex = 34
         '
+        'LastEvent
+        '
+        Me.LastEvent.Location = New System.Drawing.Point(86, 88)
+        Me.LastEvent.Margin = New System.Windows.Forms.Padding(2)
+        Me.LastEvent.Name = "LastEvent"
+        Me.LastEvent.Size = New System.Drawing.Size(288, 20)
+        Me.LastEvent.TabIndex = 37
+        '
+        'LastEventLabel
+        '
+        Me.LastEventLabel.AutoSize = True
+        Me.LastEventLabel.Location = New System.Drawing.Point(26, 91)
+        Me.LastEventLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LastEventLabel.Name = "LastEventLabel"
+        Me.LastEventLabel.Size = New System.Drawing.Size(58, 13)
+        Me.LastEventLabel.TabIndex = 36
+        Me.LastEventLabel.Text = "Last Event"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(8, 74)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(93, 13)
+        Me.Label2.TabIndex = 35
+        Me.Label2.Text = "User Defined Info:"
+        '
+        'CommitChangesButton
+        '
+        Me.CommitChangesButton.Location = New System.Drawing.Point(269, 6)
+        Me.CommitChangesButton.Margin = New System.Windows.Forms.Padding(2)
+        Me.CommitChangesButton.Name = "CommitChangesButton"
+        Me.CommitChangesButton.Size = New System.Drawing.Size(105, 19)
+        Me.CommitChangesButton.TabIndex = 38
+        Me.CommitChangesButton.Text = "Commit Changes"
+        Me.CommitChangesButton.UseVisualStyleBackColor = True
+        '
         'StatusUpdateGUIFrontend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(482, 113)
+        Me.Controls.Add(Me.CommitChangesButton)
+        Me.Controls.Add(Me.LastEvent)
+        Me.Controls.Add(Me.LastEventLabel)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Location)
         Me.Controls.Add(Me.Party)
         Me.Controls.Add(Me.Label1)
@@ -172,6 +218,10 @@ Partial Class StatusUpdateGUIFrontend
     Friend WithEvents Party As System.Windows.Forms.Label
 #Disable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
     Friend WithEvents Location As System.Windows.Forms.Label
+    Friend WithEvents LastEvent As TextBox
+    Friend WithEvents LastEventLabel As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents CommitChangesButton As Button
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
 
 End Class

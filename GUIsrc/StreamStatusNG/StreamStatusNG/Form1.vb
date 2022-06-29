@@ -220,6 +220,7 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.Armor(0) = "None"
             myXMLInput.PartyLevels(0) = 0
             myXMLInput.ExpToLevel(0) = 0
+            myXMLInput.LastEvent = committedLastEvent
         End If
 #Disable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
         XmlWrite(myXMLInput)
@@ -309,6 +310,10 @@ Public Class StatusUpdateGUIFrontend
             ExceptionHandler("SaveMap failed to update. Is FF7 no longer running? Terminating.")
         End If
         ScreenUpdate()
+    End Sub
+
+    Private Sub CommitChangesButton_Click(sender As Object, e As EventArgs) Handles CommitChangesButton.Click
+        committedLastEvent = LastEvent.Text
     End Sub
 End Class
 
