@@ -12,9 +12,7 @@
    code is freely available for your use.
 */
 
-putenv('GDFONTPATH=' . realpath('.'));
-// Set font filename
-$font = './washrasb';
+$font = dirname(__FILE__) . '/base/washrab.ttf';
 
 // Function to log a line to a file.
 function logIt($logstring) {
@@ -30,7 +28,6 @@ function pxtoPt($pixels) {
 // Function to print an error to an image, link the image, and then die. Contains a small subset of this program within it.
 // Code fast, compile young, and leave a beautifulCorpse(). Needs to be less than 24 characters!
 function beautifulCorpse($string) {
-    $font = 'c:\xampp\htdocs\streamstatus\font\washrab.ttf';
     $errimg = imagecreatefrompng("base/background.png");
     imagesavealpha($errimg, TRUE);
     $ercolor = imagecolorallocatealpha($errimg, 255, 255, 255, 0);
@@ -138,12 +135,6 @@ if (isset($status->lastevent)) {
     $lastevent = $status->lastevent;
 } else {
     logIt("ERR: Could not find last event.");
-}
-if (isset($status->mods)) {
-    $counter = $counter + 1;
-    $mods = $status->mods->mod;
-} else {
-    logIt("ERR: Could not find list of mods in use.");
 }
 if (isset($status->party)) {
     if (isset($status->party->member)) {
