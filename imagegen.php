@@ -213,16 +213,14 @@ foreach (range(1, $streamspaces) as $unused) {
 foreach (range(1, $localspaces) as $unused) {
 	$localpad = $localpad . " ";
 }
-$outstring = $outstring . "   Local" . $localpad . " - " . date("H:i:s") . "\n";
-$outstring = $outstring . "   Stream" . $streampad . " - " . $streamtime . "\n";
-$outstring = $outstring . "   In-Game - " . $gametime . "\n\n";
-// Disc
-$outstring = $outstring . "Disc " . $disc . "/3\n\n";
+$outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
+$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
+$outstring = $outstring . "In-Game - " . $gametime . "\n\n";
 // Location
-$outstring = $outstring . "Location:\n    " . $location . "\n\n";
+$outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n    " . $location . "\n\n";
 
 // Party
-$outstring = $outstring . "Party:\n    ";
+$outstring = $outstring . "Party:\n ";
 $nummems = 0;
 foreach ($members as $member) {
 	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
@@ -234,18 +232,22 @@ foreach ($members as $member) {
 		if (($diff%$spacelen) > $spacelen-3) {
 			$spaces = $spaces + 1;
 		}
+		//foreach (range(1, $spaces) as $unused) {
 		foreach (range(1, $spaces) as $unused) {
 			$namestr = $namestr . " ";
 		}
 	} else {
 		$namestr = $member->name;
+		
 	}
-    $outstring = $outstring . $namestr . " " . "L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
-	$outstring = $outstring . "- Wep " . $member->weapon . "\n   ";
+    $outstring = $outstring . $namestr . " " . "\n  " . "L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
+	$outstring = $outstring . "Wp: " . $member->weapon ."\n Ar:  " . $member->armor . "\n Ac:  ". $member->accessory . "\n";
+	//$outstring = $outstring . "   Armor  " . $member->armor . "\n";
+	$outstring = $outstring . "\n";
 }
 $outstring = $outstring . "\n";
 // Mods
-$outstring = $outstring . "Mods:\n";
+/* $outstring = $outstring . "Mods:\n";
 $outstring = $outstring . "-Custom Random Battle/Fanfare\n";
 $outstring = $outstring . "-Custom Soundtrack\n";
 $outstring = $outstring . "-Cosmo Memory\n";
@@ -259,7 +261,7 @@ $outstring = $outstring . "-SYW Spell Textures\n";
 $outstring = $outstring . "-Finishing Touch\n";
 $outstring = $outstring . "-Enhanced Stock UI\n";
 $outstring = $outstring . "-SYW Worldmap Textures\n\n";
- 
+  */
 // Trim any leading/trailing newlines or etc from output string
 $outstring = trim($outstring);
 
