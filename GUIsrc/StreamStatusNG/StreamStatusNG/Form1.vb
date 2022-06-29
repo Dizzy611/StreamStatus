@@ -25,6 +25,7 @@ Public Class StatusUpdateGUIFrontend
         Public Armor As String()
         Public Accessory As String()
         Public HP As String()
+        Public LiveGil As Integer
         Public BaseHP As String()
     End Structure
 
@@ -77,6 +78,7 @@ Public Class StatusUpdateGUIFrontend
         "Power Wrist", "Protect Vest", "Earring", "Talisman", "Choco Feater", "Amulet", "Champion Belt", "Poison Ring", "Tough Ring", "Circlet", "Star Pendant", "Silver Glasses", "Headband", "Fairy Ring", "Jem Ring", "White Cape", "Sprint Shoes", "Peace Ring", "Ribbon", "Fire Ring", "Ice Ring", "Bolt Ring", "Tetra Elemental", "Safety Bit", "Fury Ring", "Curse Ring", "Protect Ring", "Cat's Bell", "Reflect Ring", "Water Ring", "Sneak Glove", "HypnoCrown",
         "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "none"
         }
+        Input.LiveGil = 0
         Dim Settings As XmlWriterSettings = New XmlWriterSettings()
         Settings.Indent = True
         Try
@@ -87,6 +89,7 @@ Public Class StatusUpdateGUIFrontend
                 writer.WriteElementString("location", Input.Location)              '    <location>God Knows</location>
                 writer.WriteElementString("streamtime", Input.StreamTime)          '    <timestarted>1428292404</timestarted>
                 writer.WriteElementString("gametime", Input.GameTime)              '    <gametime>79324</gametime>
+                writer.WriteElementString("gil", Input.LiveGil)                        '    <gil>1234</gil>
                 writer.WriteElementString("lastevent", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
                 writer.WriteStartElement("party")                                  '    <party>
                 Dim Index As Byte = 0
@@ -130,6 +133,11 @@ Public Class StatusUpdateGUIFrontend
         Else
             DiscNum.Text = "Disc X/3"
             myXMLInput.Disc = 0
+        End If
+        If mySaveMap.LiveGil = 0 Then
+            myXMLInput.LiveGil = 0
+        Else
+            myXMLInput.LiveGil = mySaveMap.LiveGil
         End If
         If Not String.IsNullOrWhiteSpace(mySaveMap.LiveMapName) Then
             Location.Text = mySaveMap.LiveMapName
@@ -193,12 +201,15 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.PartyNames(0) = "None"
             myXMLInput.BaseHP(0) = 0
             myXMLInput.HP(0) = 0
+            myXMLInput.HP(0) = 0
             myXMLInput.Weapon(0) = "None"
             myXMLInput.Accessory(255) = "None"
             myXMLInput.Armor(0) = "None"
             myXMLInput.PartyLevels(0) = 0
         End If
+#Disable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
         XmlWrite(myXMLInput)
+#Enable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
 
     End Sub
 

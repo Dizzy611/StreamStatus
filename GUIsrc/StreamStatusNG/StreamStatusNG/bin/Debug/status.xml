@@ -1,19 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <status>
   <disc>1</disc>
-  <location>Shin-Ra Mansion,1F</location>
-  <streamtime>00:01:28</streamtime>
-  <gametime>09:15:59</gametime>
-  <lastevent>Nothing much.</lastevent>
-  <mods>
-    <mod>Reunion R03b</mod>
-    <mod>7thHeaven Tifa's Final Heaven</mod>
-    <mod>Team Avalanche Fields</mod>
-  </mods>
+  <location>Bone Village</location>
+  <streamtime>00:01:36</streamtime>
+  <gametime>37:58:42</gametime>
+  <gil>0</gil>
+  <lastevent />
   <party>
     <member>
       <name>Cloud</name>
-      <level>1</level>
+      <hp>2688</hp>
+      <basehp>2379</basehp>
+      <level>39</level>
+      <weapon>Murasame</weapon>
+      <armor>Dragon Armlet</armor>
+      <accessory>Ribbon</accessory>
+    </member>
+    <member>
+      <name>Vincent</name>
+      <hp>2150</hp>
+      <basehp>2010</basehp>
+      <level>37</level>
+      <weapon>Lariat</weapon>
+      <armor>Gold Armlet</armor>
+      <accessory>Peace Ring</accessory>
+    </member>
+    <member>
+      <name>Red XIII</name>
+      <hp>2542</hp>
+      <basehp>2493</basehp>
+      <level>39</level>
+      <weapon>Behemoth Horn</weapon>
+      <armor>Gold Armlet</armor>
+      <accessory>Bolt Ring</accessory>
     </member>
   </party>
 </status>
