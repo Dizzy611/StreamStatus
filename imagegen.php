@@ -217,7 +217,7 @@ $outstring = $outstring . "In-Game - " . $gametime . "\n";
 $outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n " . $location . "\n";
 
 // Party
-$outstring = $outstring . "Party:\n ";
+$outstring = $outstring . "\nParty:\n ";
 $outstring = $outstring . "Gil " . $status->gil . "\n";
 $nummems = 0;
 foreach ($members as $member) {
@@ -239,7 +239,7 @@ foreach ($members as $member) {
 		
 	} */
 	$namestr = $member->name;
-    $outstring = $outstring . $namestr . " " . "\n" . " L" . $member->level . " HP " . $member->hp . "/" . $member->basehp . " MP " . $member->mp . "/" . $member->basemp . "\n ";
+    $outstring = $outstring . $namestr . " " . " L" . $member->level . " XpToLvl " . $member->exptolevel . "\n  HP " . $member->hp . "/" . $member->basehp . " MP " . $member->mp . "/" . $member->basemp . "\n ";
 	$outstring = $outstring . " Wp: " . $member->weapon ."\n  Ar: " . $member->armor . "\n  Ac: ". $member->accessory . "\n";
 	$outstring = $outstring . "\n";
 }

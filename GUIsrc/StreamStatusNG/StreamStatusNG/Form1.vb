@@ -21,6 +21,7 @@ Public Class StatusUpdateGUIFrontend
         Public LastEvent As String
         Public PartyNames As String()
         Public PartyLevels As String()
+        Public ExpToLevel As String()
         Public Weapon As String()
         Public Armor As String()
         Public Accessory As String()
@@ -102,6 +103,7 @@ Public Class StatusUpdateGUIFrontend
                     writer.WriteElementString("mp", Input.MP(Index).ToString())                      '            <mp>6969</mp>
                     writer.WriteElementString("basemp", Input.BaseMP(Index).ToString())                      '            <basemp>6969</basemp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
+                    writer.WriteElementString("exptolevel", Input.ExpToLevel(Index).ToString()) '   <level>3</level>
                     writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
                     writer.WriteElementString("armor", ArmorNames(Input.Armor(Index)))    '            <armour>Blah</armour>
                     writer.WriteElementString("accessory", AccessoryNames(Input.Accessory(Index)))    '            <Accessory>Blah</Accessory>
@@ -181,6 +183,7 @@ Public Class StatusUpdateGUIFrontend
             ReDim myXMLInput.Armor(numParty - 1)
             ReDim myXMLInput.Accessory(numParty - 1)
             ReDim myXMLInput.PartyLevels(numParty - 1)
+            ReDim myXMLInput.ExpToLevel(numParty - 1)
             ReDim myXMLInput.HP(numParty - 1)
             ReDim myXMLInput.MP(numParty - 1)
             ReDim myXMLInput.BaseHP(numParty - 1)
@@ -195,6 +198,7 @@ Public Class StatusUpdateGUIFrontend
                 myXMLInput.MP(myIterator) = mySaveMap.LiveParty(myIterator).MP
                 myXMLInput.BaseMP(myIterator) = mySaveMap.LiveParty(myIterator).BaseMP
                 myXMLInput.PartyLevels(myIterator) = mySaveMap.LiveParty(myIterator).Level
+                myXMLInput.ExpToLevel(myIterator) = mySaveMap.LiveParty(myIterator).ExpToLevel
             Next
         Else
             ReDim myXMLInput.PartyNames(0)
@@ -202,6 +206,7 @@ Public Class StatusUpdateGUIFrontend
             ReDim myXMLInput.Armor(0)
             ReDim myXMLInput.Accessory(0)
             ReDim myXMLInput.PartyLevels(0)
+            ReDim myXMLInput.ExpToLevel(0)
             ReDim myXMLInput.HP(0)
             ReDim myXMLInput.BaseHP(0)
             ReDim myXMLInput.MP(0)
@@ -214,6 +219,7 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.Accessory(255) = "None"
             myXMLInput.Armor(0) = "None"
             myXMLInput.PartyLevels(0) = 0
+            myXMLInput.ExpToLevel(0) = 0
         End If
 #Disable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
         XmlWrite(myXMLInput)
