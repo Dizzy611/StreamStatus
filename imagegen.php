@@ -213,12 +213,8 @@ foreach (range(1, $localspaces) as $unused) {
 $outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
 //$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
 $outstring = $outstring . "In-Game - " . $gametime . "\n";
-// Location
 $outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n " . $location . "\n";
-
-// Party
-$outstring = $outstring . "\nParty:\n ";
-$outstring = $outstring . "Gil " . $status->gil . "\n";
+$outstring = $outstring . "\nParty:\n " . "Gil " . $status->gil . "\n\n";
 $nummems = 0;
 foreach ($members as $member) {
 	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
@@ -251,7 +247,7 @@ $outstring = $outstring . "-Custom Soundtrack\n";
 $outstring = $outstring . "-Cosmo Memory\n";
 $outstring = $outstring . "-60 FPS Gameplay(and NT addon)\n";
 $outstring = $outstring . "-Ninostyle Models(dyn+chibi)\n";
-$outstring = $outstring . "-Avalanche Arisen Battle Textures\n";
+$outstring = $outstring . "-Avalanche Arisen Battle\n";
 $outstring = $outstring . "-SYW Field Textures\n";
 $outstring = $outstring . "-New Threat 2.0\n";
 $outstring = $outstring . "-SYW Minigame Textures\n";
@@ -265,12 +261,12 @@ $outstring = trim($outstring);
 
 // And output! Now with hacky drop shadow.
 // First, center it.
-$bounding = imagettfbbox(pxtoPt(12), 0, $font, $outstring);
+$bounding = imagettfbbox(pxtoPt(16), 0, $font, $outstring);
 //$height = $bounding[1] - $bounding[7];
 $height = 900;
 $topy = 31;
-imagettftext($img, pxtoPt(12), 0, 27, $topy+2, $black, $font, $outstring);
-imagettftext($img, pxtoPt(12), 0, 25, $topy, $white, $font, $outstring);
+imagettftext($img, pxtoPt(16), 0, 27, $topy+2, $black, $font, $outstring);
+imagettftext($img, pxtoPt(16), 0, 25, $topy, $white, $font, $outstring);
 
 // Delete any PNGs still in the directory, and output our image
 array_map('unlink', glob("*.png"));
