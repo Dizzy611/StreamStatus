@@ -14,7 +14,7 @@
 
 
 // Set font filename
-$font = 'D:\xampp\htdocs\streamstatus\font\verdana.ttf';
+$font = 'D:\xampp\htdocs\streamstatus\font\DejaVuSansMono.ttf';
 
 // Function to log a line to a file.
 function logIt($logstring) {
@@ -214,7 +214,7 @@ foreach (range(1, $localspaces) as $unused) {
 	$localpad = $localpad . " ";
 }
 $outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
-$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
+//$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
 $outstring = $outstring . "In-Game - " . $gametime . "\n\n";
 // Location
 $outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n    " . $location . "\n\n";
@@ -241,14 +241,13 @@ foreach ($members as $member) {
 		
 	} */
 	$namestr = $member->name;
-    $outstring = $outstring . $namestr . " " . "\n  " . "L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
-	$outstring = $outstring . "Wp: " . $member->weapon ."\n Ar:  " . $member->armor . "\n Ac:  ". $member->accessory . "\n";
-	//$outstring = $outstring . "   Armor  " . $member->armor . "\n";
+    $outstring = $outstring . $namestr . " " . "\n" . " L" . $member->level . " HP " . $member->hp . "/" . $member->basehp ."\n ";
+	$outstring = $outstring . " Wp: " . $member->weapon ."\n  Ar: " . $member->armor . "\n  Ac: ". $member->accessory . "\n";
 	$outstring = $outstring . "\n";
 }
 $outstring = $outstring . "\n";
 // Mods
-/* $outstring = $outstring . "Mods:\n";
+$outstring = $outstring . "Mods:\n";
 $outstring = $outstring . "-Custom Random Battle/Fanfare\n";
 $outstring = $outstring . "-Custom Soundtrack\n";
 $outstring = $outstring . "-Cosmo Memory\n";
@@ -261,18 +260,19 @@ $outstring = $outstring . "-SYW Minigame Textures\n";
 $outstring = $outstring . "-SYW Spell Textures\n";
 $outstring = $outstring . "-Finishing Touch\n";
 $outstring = $outstring . "-Enhanced Stock UI\n";
-$outstring = $outstring . "-SYW Worldmap Textures\n\n";
-  */
+$outstring = $outstring . "-SYW Worldmap Textures\n";
+ 
 // Trim any leading/trailing newlines or etc from output string
 $outstring = trim($outstring);
 
 // And output! Now with hacky drop shadow.
 // First, center it.
-$bounding = imagettfbbox(pxtoPt(16), 0, $font, $outstring);
-$height = $bounding[1] - $bounding[7];
+$bounding = imagettfbbox(pxtoPt(12), 0, $font, $outstring);
+//$height = $bounding[1] - $bounding[7];
+$height = $bounding[1];
 $topy = 360 - ($height/2);
-imagettftext($img, pxtoPt(16), 0, 27, $topy+2, $black, $font, $outstring);
-imagettftext($img, pxtoPt(16), 0, 25, $topy, $white, $font, $outstring);
+imagettftext($img, pxtoPt(12), 0, 27, $topy+2, $black, $font, $outstring);
+imagettftext($img, pxtoPt(12), 0, 25, $topy, $white, $font, $outstring);
 
 // Delete any PNGs still in the directory, and output our image
 array_map('unlink', glob("*.png"));
