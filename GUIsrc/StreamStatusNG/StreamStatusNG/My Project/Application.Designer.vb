@@ -26,13 +26,13 @@ Namespace My
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
             Me.IsSingleInstance = true
             Me.EnableVisualStyles = true
-            Me.SaveMySettingsOnExit = false
+            Me.SaveMySettingsOnExit = true
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.StreamStatusNG.StatusUpdateGUIFrontend
+            Me.MainForm = Global.StreamStatus.StatusUpdateGUIFrontend
         End Sub
     End Class
 End Namespace

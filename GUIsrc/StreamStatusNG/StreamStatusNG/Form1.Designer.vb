@@ -23,6 +23,7 @@ Partial Class StatusUpdateGUIFrontend
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(StatusUpdateGUIFrontend))
         Me.DiscNum = New System.Windows.Forms.Label()
         Me.LocationLabel = New System.Windows.Forms.Label()
         Me.Time = New System.Windows.Forms.Label()
@@ -154,8 +155,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEventLabel.AutoSize = True
         Me.LastEventLabel.Location = New System.Drawing.Point(26, 91)
         Me.LastEventLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LastEventLabel.Name = "Notes"
-        Me.LastEventLabel.Size = New System.Drawing.Size(58, 13)
+        Me.LastEventLabel.Name = "LastEventLabel"
+        Me.LastEventLabel.Size = New System.Drawing.Size(35, 13)
         Me.LastEventLabel.TabIndex = 36
         Me.LastEventLabel.Text = "Notes"
         '
@@ -186,8 +187,15 @@ Partial Class StatusUpdateGUIFrontend
         Me.Controls.Add(Me.Time)
         Me.Controls.Add(Me.LocationLabel)
         Me.Controls.Add(Me.DiscNum)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(498, 152)
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(498, 152)
         Me.Name = "StatusUpdateGUIFrontend"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "FF7 Stream Status Overlay: Live Updater"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -197,10 +205,10 @@ Partial Class StatusUpdateGUIFrontend
     Private Sub StatusUpdateGUIFrontend_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
     End Sub
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
-        LastEvent.Text = StripTags(testdata)
-    End Sub
+    '   Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    '  Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
+    '     LastEvent.Text = StripTags(testdata)
+    'End Sub
 
     Friend WithEvents DiscNum As System.Windows.Forms.Label
     Friend WithEvents LocationLabel As System.Windows.Forms.Label
