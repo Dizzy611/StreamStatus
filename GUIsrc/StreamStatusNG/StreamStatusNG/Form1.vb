@@ -1,6 +1,9 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Diagnostics
 Imports System.Xml
+Imports System.Text.RegularExpressions
+
+
 
 Public Class StatusUpdateGUIFrontend
 
@@ -13,6 +16,10 @@ Public Class StatusUpdateGUIFrontend
     Dim mySaveMap As FF7SaveMap
     Dim MemRead As NativeMemoryReader
     Dim committedLastEvent As String = "None"
+    Dim sReader As String
+
+
+
     Structure WriterInput
         Public Disc As Byte
         Public Location As String
@@ -87,12 +94,13 @@ Public Class StatusUpdateGUIFrontend
             Using writer As XmlWriter = XmlWriter.Create(".\status.xml", Settings)
                 writer.WriteStartDocument()
                 writer.WriteStartElement("status")                                 ' <status>
+                writer.WriteElementString("quicknotes", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
                 writer.WriteElementString("disc", Input.Disc)                      '    <disc>1</disc>
                 writer.WriteElementString("location", Input.Location)              '    <location>God Knows</location>
                 writer.WriteElementString("streamtime", Input.StreamTime)          '    <timestarted>1428292404</timestarted>
                 writer.WriteElementString("gametime", Input.GameTime)              '    <gametime>79324</gametime>
                 writer.WriteElementString("gil", Input.LiveGil)                        '    <gil>1234</gil>
-                writer.WriteElementString("lastevent", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
+                'writer.WriteElementString("lastevent", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
                 writer.WriteStartElement("party")                                  '    <party>
                 Dim Index As Byte = 0
                 For Each myName In Input.PartyNames
@@ -120,7 +128,9 @@ Public Class StatusUpdateGUIFrontend
             Return
         End Try
     End Sub
+
     Private Sub ScreenUpdate()
+
         Dim myXMLInput As WriterInput
         If Started = False Then
             StatusBar = 255
@@ -220,13 +230,17 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.Armor(0) = "None"
             myXMLInput.PartyLevels(0) = 0
             myXMLInput.ExpToLevel(0) = 0
-            myXMLInput.LastEvent = committedLastEvent
         End If
 #Disable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
+        myXMLInput.LastEvent = committedLastEvent
         XmlWrite(myXMLInput)
 #Enable Warning BC42108 ' Variable is passed by reference before it has been assigned a value
 
     End Sub
+    Function StripTags(html As String) As String
+        ' Remove HTML tags.
+        Return Regex.Replace(html, "<.*?>", "")
+    End Function
 
     Private Function SecsToHMS(ByVal Seconds As Int32) As String
         Dim outHours As Int32
@@ -313,7 +327,9 @@ Public Class StatusUpdateGUIFrontend
     End Sub
 
     Private Sub CommitChangesButton_Click(sender As Object, e As EventArgs) Handles CommitChangesButton.Click
-        committedLastEvent = LastEvent.Text
+        If Not String.IsNullOrWhiteSpace(LastEvent.Text) Then
+            committedLastEvent = LastEvent.Text
+        End If
     End Sub
 End Class
 

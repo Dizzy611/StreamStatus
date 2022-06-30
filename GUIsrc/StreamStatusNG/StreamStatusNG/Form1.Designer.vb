@@ -36,7 +36,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Location = New System.Windows.Forms.Label()
         Me.LastEvent = New System.Windows.Forms.TextBox()
         Me.LastEventLabel = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.CommitChangesButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -87,7 +86,7 @@ Partial Class StatusUpdateGUIFrontend
         'Status
         '
         Me.Status.AutoSize = True
-        Me.Status.Location = New System.Drawing.Point(402, 92)
+        Me.Status.Location = New System.Drawing.Point(410, 91)
         Me.Status.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Status.Name = "Status"
         Me.Status.Size = New System.Drawing.Size(47, 13)
@@ -96,20 +95,20 @@ Partial Class StatusUpdateGUIFrontend
         '
         'StartButton
         '
-        Me.StartButton.Location = New System.Drawing.Point(377, 6)
+        Me.StartButton.Location = New System.Drawing.Point(389, 0)
         Me.StartButton.Margin = New System.Windows.Forms.Padding(2)
         Me.StartButton.Name = "StartButton"
-        Me.StartButton.Size = New System.Drawing.Size(94, 39)
+        Me.StartButton.Size = New System.Drawing.Size(94, 30)
         Me.StartButton.TabIndex = 22
         Me.StartButton.Text = "Start"
         Me.StartButton.UseVisualStyleBackColor = True
         '
         'StopButton
         '
-        Me.StopButton.Location = New System.Drawing.Point(377, 50)
+        Me.StopButton.Location = New System.Drawing.Point(389, 28)
         Me.StopButton.Margin = New System.Windows.Forms.Padding(2)
         Me.StopButton.Name = "StopButton"
-        Me.StopButton.Size = New System.Drawing.Size(94, 39)
+        Me.StopButton.Size = New System.Drawing.Size(94, 30)
         Me.StopButton.TabIndex = 23
         Me.StopButton.Text = "Stop"
         Me.StopButton.UseVisualStyleBackColor = True
@@ -155,27 +154,16 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEventLabel.AutoSize = True
         Me.LastEventLabel.Location = New System.Drawing.Point(26, 91)
         Me.LastEventLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LastEventLabel.Name = "LastEventLabel"
+        Me.LastEventLabel.Name = "Notes"
         Me.LastEventLabel.Size = New System.Drawing.Size(58, 13)
         Me.LastEventLabel.TabIndex = 36
-        Me.LastEventLabel.Text = "Last Event"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 74)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(93, 13)
-        Me.Label2.TabIndex = 35
-        Me.Label2.Text = "User Defined Info:"
+        Me.LastEventLabel.Text = "Notes"
         '
         'CommitChangesButton
         '
-        Me.CommitChangesButton.Location = New System.Drawing.Point(269, 6)
-        Me.CommitChangesButton.Margin = New System.Windows.Forms.Padding(2)
+        Me.CommitChangesButton.Location = New System.Drawing.Point(389, 56)
         Me.CommitChangesButton.Name = "CommitChangesButton"
-        Me.CommitChangesButton.Size = New System.Drawing.Size(105, 19)
+        Me.CommitChangesButton.Size = New System.Drawing.Size(94, 30)
         Me.CommitChangesButton.TabIndex = 38
         Me.CommitChangesButton.Text = "Commit Changes"
         Me.CommitChangesButton.UseVisualStyleBackColor = True
@@ -188,7 +176,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Controls.Add(Me.CommitChangesButton)
         Me.Controls.Add(Me.LastEvent)
         Me.Controls.Add(Me.LastEventLabel)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Location)
         Me.Controls.Add(Me.Party)
         Me.Controls.Add(Me.Label1)
@@ -206,6 +193,15 @@ Partial Class StatusUpdateGUIFrontend
         Me.PerformLayout()
 
     End Sub
+
+    Private Sub StatusUpdateGUIFrontend_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
+    End Sub
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
+        LastEvent.Text = StripTags(testdata)
+    End Sub
+
     Friend WithEvents DiscNum As System.Windows.Forms.Label
     Friend WithEvents LocationLabel As System.Windows.Forms.Label
     Friend WithEvents Time As System.Windows.Forms.Label
@@ -220,7 +216,6 @@ Partial Class StatusUpdateGUIFrontend
     Friend WithEvents Location As System.Windows.Forms.Label
     Friend WithEvents LastEvent As TextBox
     Friend WithEvents LastEventLabel As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents CommitChangesButton As Button
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
 
