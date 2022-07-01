@@ -31,3 +31,4 @@ D:\programming\git\StreamStatus\GUIsrc\StreamStatusNG\StreamStatusNG\bin\Debug\S
 D:\programming\git\StreamStatus\GUIsrc\StreamStatusNG\StreamStatusNG\bin\Debug\StreamStatus.pdb
 D:\programming\git\StreamStatus\GUIsrc\StreamStatusNG\StreamStatusNG\obj\Debug\StreamStatus.exe
 D:\programming\git\StreamStatus\GUIsrc\StreamStatusNG\StreamStatusNG\obj\Debug\StreamStatus.pdb
+D:\programming\git\StreamStatus\GUIsrc\StreamStatusNG\StreamStatusNG\obj\Debug\StreamStatusNG.vbprojAssemblyReference.cache

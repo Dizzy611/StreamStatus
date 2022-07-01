@@ -205,10 +205,10 @@ Partial Class StatusUpdateGUIFrontend
     Private Sub StatusUpdateGUIFrontend_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
     End Sub
-    '   Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '  Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
-    '     LastEvent.Text = StripTags(testdata)
-    'End Sub
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
+        LastEvent.Text = StripTags(testdata)
+    End Sub
 
     Friend WithEvents DiscNum As System.Windows.Forms.Label
     Friend WithEvents LocationLabel As System.Windows.Forms.Label
