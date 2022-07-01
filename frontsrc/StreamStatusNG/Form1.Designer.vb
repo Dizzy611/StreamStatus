@@ -31,19 +31,17 @@ Partial Class StatusUpdateGUIFrontend
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Status = New System.Windows.Forms.Label()
         Me.StartButton = New System.Windows.Forms.Button()
-        Me.StopButton = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Party = New System.Windows.Forms.Label()
         Me.Location = New System.Windows.Forms.Label()
         Me.LastEvent = New System.Windows.Forms.TextBox()
         Me.LastEventLabel = New System.Windows.Forms.Label()
-        Me.CommitChangesButton = New System.Windows.Forms.Button()
+        Me.CurrentNotes = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'DiscNum
         '
         Me.DiscNum.AutoSize = True
-        Me.DiscNum.Location = New System.Drawing.Point(26, 23)
+        Me.DiscNum.Location = New System.Drawing.Point(11, 56)
         Me.DiscNum.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.DiscNum.Name = "DiscNum"
         Me.DiscNum.Size = New System.Drawing.Size(49, 13)
@@ -53,7 +51,7 @@ Partial Class StatusUpdateGUIFrontend
         'LocationLabel
         '
         Me.LocationLabel.AutoSize = True
-        Me.LocationLabel.Location = New System.Drawing.Point(26, 37)
+        Me.LocationLabel.Location = New System.Drawing.Point(11, 36)
         Me.LocationLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LocationLabel.Name = "LocationLabel"
         Me.LocationLabel.Size = New System.Drawing.Size(54, 13)
@@ -63,7 +61,7 @@ Partial Class StatusUpdateGUIFrontend
         'Time
         '
         Me.Time.AutoSize = True
-        Me.Time.Location = New System.Drawing.Point(26, 50)
+        Me.Time.Location = New System.Drawing.Point(-2, 0)
         Me.Time.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Time.Name = "Time"
         Me.Time.Size = New System.Drawing.Size(318, 13)
@@ -73,7 +71,7 @@ Partial Class StatusUpdateGUIFrontend
         'PartyLabel
         '
         Me.PartyLabel.AutoSize = True
-        Me.PartyLabel.Location = New System.Drawing.Point(75, 23)
+        Me.PartyLabel.Location = New System.Drawing.Point(11, 19)
         Me.PartyLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.PartyLabel.Name = "PartyLabel"
         Me.PartyLabel.Size = New System.Drawing.Size(34, 13)
@@ -87,15 +85,17 @@ Partial Class StatusUpdateGUIFrontend
         'Status
         '
         Me.Status.AutoSize = True
-        Me.Status.Location = New System.Drawing.Point(410, 91)
+        Me.Status.ForeColor = System.Drawing.Color.Red
+        Me.Status.Location = New System.Drawing.Point(386, 32)
         Me.Status.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Status.Name = "Status"
-        Me.Status.Size = New System.Drawing.Size(47, 13)
+        Me.Status.Size = New System.Drawing.Size(21, 13)
         Me.Status.TabIndex = 14
-        Me.Status.Text = "Stopped"
+        Me.Status.Text = "Off"
         '
         'StartButton
         '
+        Me.StartButton.ForeColor = System.Drawing.Color.Green
         Me.StartButton.Location = New System.Drawing.Point(389, 0)
         Me.StartButton.Margin = New System.Windows.Forms.Padding(2)
         Me.StartButton.Name = "StartButton"
@@ -104,30 +104,10 @@ Partial Class StatusUpdateGUIFrontend
         Me.StartButton.Text = "Start"
         Me.StartButton.UseVisualStyleBackColor = True
         '
-        'StopButton
-        '
-        Me.StopButton.Location = New System.Drawing.Point(389, 28)
-        Me.StopButton.Margin = New System.Windows.Forms.Padding(2)
-        Me.StopButton.Name = "StopButton"
-        Me.StopButton.Size = New System.Drawing.Size(94, 30)
-        Me.StopButton.TabIndex = 23
-        Me.StopButton.Text = "Stop"
-        Me.StopButton.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 6)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 13)
-        Me.Label1.TabIndex = 24
-        Me.Label1.Text = "Live Info:"
-        '
         'Party
         '
         Me.Party.AutoSize = True
-        Me.Party.Location = New System.Drawing.Point(113, 23)
+        Me.Party.Location = New System.Drawing.Point(65, 19)
         Me.Party.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Party.Name = "Party"
         Me.Party.Size = New System.Drawing.Size(0, 13)
@@ -136,7 +116,7 @@ Partial Class StatusUpdateGUIFrontend
         'Location
         '
         Me.Location.AutoSize = True
-        Me.Location.Location = New System.Drawing.Point(76, 37)
+        Me.Location.Location = New System.Drawing.Point(65, 36)
         Me.Location.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Location.Name = "Location"
         Me.Location.Size = New System.Drawing.Size(0, 13)
@@ -144,43 +124,40 @@ Partial Class StatusUpdateGUIFrontend
         '
         'LastEvent
         '
-        Me.LastEvent.Location = New System.Drawing.Point(86, 88)
+        Me.LastEvent.Location = New System.Drawing.Point(1, 97)
         Me.LastEvent.Margin = New System.Windows.Forms.Padding(2)
         Me.LastEvent.Name = "LastEvent"
-        Me.LastEvent.Size = New System.Drawing.Size(288, 20)
+        Me.LastEvent.Size = New System.Drawing.Size(482, 20)
         Me.LastEvent.TabIndex = 37
         '
         'LastEventLabel
         '
         Me.LastEventLabel.AutoSize = True
-        Me.LastEventLabel.Location = New System.Drawing.Point(26, 91)
+        Me.LastEventLabel.Location = New System.Drawing.Point(-2, 82)
         Me.LastEventLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LastEventLabel.Name = "LastEventLabel"
         Me.LastEventLabel.Size = New System.Drawing.Size(35, 13)
         Me.LastEventLabel.TabIndex = 36
         Me.LastEventLabel.Text = "Notes"
         '
-        'CommitChangesButton
+        'CurrentNotes
         '
-        Me.CommitChangesButton.Location = New System.Drawing.Point(389, 56)
-        Me.CommitChangesButton.Name = "CommitChangesButton"
-        Me.CommitChangesButton.Size = New System.Drawing.Size(94, 30)
-        Me.CommitChangesButton.TabIndex = 38
-        Me.CommitChangesButton.Text = "Commit Changes"
-        Me.CommitChangesButton.UseVisualStyleBackColor = True
+        Me.CurrentNotes.AutoSize = True
+        Me.CurrentNotes.Location = New System.Drawing.Point(39, 82)
+        Me.CurrentNotes.Name = "CurrentNotes"
+        Me.CurrentNotes.Size = New System.Drawing.Size(0, 13)
+        Me.CurrentNotes.TabIndex = 38
         '
         'StatusUpdateGUIFrontend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(482, 113)
-        Me.Controls.Add(Me.CommitChangesButton)
+        Me.Controls.Add(Me.CurrentNotes)
         Me.Controls.Add(Me.LastEvent)
         Me.Controls.Add(Me.LastEventLabel)
         Me.Controls.Add(Me.Location)
         Me.Controls.Add(Me.Party)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.StopButton)
         Me.Controls.Add(Me.StartButton)
         Me.Controls.Add(Me.Status)
         Me.Controls.Add(Me.PartyLabel)
@@ -204,8 +181,26 @@ Partial Class StatusUpdateGUIFrontend
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
-        LastEvent.Text = StripTags(testdata)
+        CurrentNotes.Text = StripTags(testdata)
     End Sub
+
+    Private Sub LastEvent_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles LastEvent.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            CurrentNotes.Text = LTrim(LastEvent.Text)
+            committedLastEvent = LTrim(LastEvent.Text)
+            ScreenUpdate()
+        End If
+    End Sub
+
+    '  Private Sub LastEvent_KeyPress(sender As System.Object, e As System.EventArgs) Handles LastEvent.KeyPress
+    ' Dim tmp As System.Windows.Forms.KeyPressEventArgs = e
+    'If tmp.KeyChar = ChrW(Keys.Enter) Then
+    '       committedLastEvent = LTrim(LastEvent.Text)
+    '      ScreenUpdate()
+    'End If
+    'End Sub
 
     Friend WithEvents DiscNum As System.Windows.Forms.Label
     Friend WithEvents LocationLabel As System.Windows.Forms.Label
@@ -214,14 +209,12 @@ Partial Class StatusUpdateGUIFrontend
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Status As System.Windows.Forms.Label
     Friend WithEvents StartButton As System.Windows.Forms.Button
-    Friend WithEvents StopButton As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Party As System.Windows.Forms.Label
 #Disable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
     Friend WithEvents Location As System.Windows.Forms.Label
     Friend WithEvents LastEvent As TextBox
     Friend WithEvents LastEventLabel As Label
-    Friend WithEvents CommitChangesButton As Button
+    Friend WithEvents CurrentNotes As Label
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
 
 End Class

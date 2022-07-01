@@ -2,6 +2,7 @@
 Imports System.Diagnostics
 Imports System.Xml
 Imports System.Text.RegularExpressions
+Imports System.Drawing
 
 
 
@@ -46,23 +47,30 @@ Public Class StatusUpdateGUIFrontend
     Private Sub UpdateStatus()
         Select Case StatusBar
             Case 255
-                Status.Text = "Stopped"
+                Me.Status.ForeColor = System.Drawing.Color.Red
+                Status.Text = "Off"
             Case 254
-                Status.Text = "none"
+                Me.Status.ForeColor = System.Drawing.Color.Blue
+                Status.Text = "Error"
             Case 0
-                Status.Text = "Running"
+                Me.Status.ForeColor = System.Drawing.Color.Green
+                Status.Text = "ON"
                 StatusBar = StatusBar + 1
             Case 1
-                Status.Text = "Running."
+                Me.Status.ForeColor = System.Drawing.Color.Green
+                Status.Text = "ON"
                 StatusBar = StatusBar + 1
             Case 2
-                Status.Text = "Running.."
+                Me.Status.ForeColor = System.Drawing.Color.Green
+                Status.Text = "ON"
                 StatusBar = StatusBar + 1
             Case 3
-                Status.Text = "Running..."
+                Me.Status.ForeColor = System.Drawing.Color.Green
+                Status.Text = "ON"
                 StatusBar = 0
             Case Else
-                Status.Text = "Stopped"
+                Me.Status.ForeColor = System.Drawing.Color.Red
+                Status.Text = "Off"
                 StatusBar = 0
         End Select
     End Sub
@@ -239,7 +247,7 @@ Public Class StatusUpdateGUIFrontend
     End Sub
     Function StripTags(html As String) As String
         ' Remove HTML tags.
-        Return Regex.Replace(html, "<.*?>", "")
+        Return Regex.Replace(html, "<(?:[^>=]|='[^']*'|=""[^""]*""|=[^'""][^\s>]*)*>", "").Trim
     End Function
 
     Private Function SecsToHMS(ByVal Seconds As Int32) As String
@@ -271,6 +279,13 @@ Public Class StatusUpdateGUIFrontend
 
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click
         If Started = True Then
+            StreamTime = 0
+            Started = False
+            Timer1.Enabled = False
+            StatusBar = 255
+            Me.StartButton.ForeColor = System.Drawing.Color.Green
+            StartButton.Text = "Start"
+            UpdateStatus()
             Return
         End If
         Try
@@ -292,24 +307,19 @@ Public Class StatusUpdateGUIFrontend
             ExceptionHandler("Sorry, your SaveMap isn't valid! Please make sure FF7 is running and ingame before you start this application. Terminating.")
             Return
         End If
-        Started = True
-        ScreenUpdate()
-        Timer1.Enabled = True
-    End Sub
-#End Region
-
-
-    Private Sub StopButton_Click(sender As Object, e As EventArgs) Handles StopButton.Click
         If Started = False Then
+            StreamTime = 0
+            Started = True
+            Timer1.Enabled = True
+            StatusBar = 1
+            Me.StartButton.ForeColor = System.Drawing.Color.Red
+            StartButton.Text = "Stop"
+            UpdateStatus()
             Return
         End If
-        StreamTime = 0
-        Started = False
-        Timer1.Enabled = False
-        StatusBar = 255
-        UpdateStatus()
+        ScreenUpdate()
     End Sub
-
+#End Region
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If Started = False Then
             StreamTime = 0
@@ -326,12 +336,7 @@ Public Class StatusUpdateGUIFrontend
         ScreenUpdate()
     End Sub
 
-    Private Sub CommitChangesButton_Click(sender As Object, e As EventArgs) Handles CommitChangesButton.Click
-        If Not String.IsNullOrWhiteSpace(LastEvent.Text) Then
-            committedLastEvent = LastEvent.Text
-        End If
-        ScreenUpdate()
-    End Sub
+
 End Class
 
 Public Class FF7SaveMap
