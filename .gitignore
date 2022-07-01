@@ -1,5 +1,5 @@
 
 *.7z
-frontsrc/StreamStatusNG/obj/*
-frontsrc/StreamstatusNG/bin/*
+frontsrc/StreamStatusNG/obj*
+frontsrc/StreamstatusNG/bin*
 frontsrc/.vs*
