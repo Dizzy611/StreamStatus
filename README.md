@@ -1,5 +1,5 @@
 # NeonLightning's Edits
-[Screenshot](https://raw.githubusercontent.com/NeonLightning/StreamStatus/master/screenshot.png)
+[Screenshot](https://raw.githubusercontent.com/NeonLightning/StreamStatus/master/SS.png)
 
 well i changed a bunch i can't really rememember what right now. the original i couldn't get working so in the process
 of trying to figure out how i did some changes. and those just kept going. i hope to merge this but i doubt they will.
