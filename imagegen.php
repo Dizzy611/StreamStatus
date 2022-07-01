@@ -25,13 +25,29 @@ function pxtoPt($pixels) {
 	return ($pixels*3)/4;
 }
 
+function utf8_wordwrap($string, $width=75, $break="\n", $cut=false)
+{
+  if($cut) {
+    // Match anything 1 to $width chars long followed by whitespace or EOS,
+    // otherwise match anything $width chars long
+    $search = '/(.{1,'.$width.'})(?:\s|$)|(.{'.$width.'})/uS';
+    $replace = '$1$2'.$break;
+  } else {
+    // Anchor the beginning of the pattern with a lookahead
+    // to avoid crazy backtracking when words are longer than $width
+    $pattern = '/(?=\s)(.{1,'.$width.'})(?:\s|$)/uS';
+    $replace = '$1'.$break;
+  }
+  return preg_replace($search, $replace, $string);
+}
+
 // Function to print an error to an image, link the image, and then die. Contains a small subset of this program within it.
 // Code fast, compile young, and leave a beautifulCorpse(). Needs to be less than 24 characters!
 function beautifulCorpse($string) {
     $errimg = imagecreatefrompng("base/background.png");
     imagesavealpha($errimg, TRUE);
     $ercolor = imagecolorallocatealpha($errimg, 255, 255, 255, 0);
-    imagettftext($errimg, pxtoPt(16), 0, 25, 30, $ercolor, $font, $string);
+    imagettftext($errimg, pxtoPt(12), 0, 25, 30, $ercolor, $font, $string);
     imagepng($errimg, "error.png", 0, NULL);
     $myurl=$_SERVER['REQUEST_URI'];
     $temparray = explode("/", $myurl);
@@ -110,7 +126,6 @@ if (isset($status->gil)) {
     $counter = $counter + 1;
     $gil = $status->gil;
 } else {
-    logIt("ERR: Could not find gil number.");
 }
 if (isset($status->location)) {
     $counter = $counter + 1;
@@ -213,11 +228,11 @@ foreach (range(1, $localspaces) as $unused) {
 $outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
 //$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
 $outstring = $outstring . "In-Game - " . $gametime . "\n";
-$outstring = $outstring . "Disc " . $disc . "/3 ". "Location:\n " . $location . "\n";
-$outstring = $outstring . "\nParty:\n " . "Gil " . $status->gil . "\n\n";
+$outstring = $outstring . "Disc " . $disc . "/3\n". "Location:\n " . $location . "\n";
+$outstring = $outstring . "Gil " . $status->gil . "\n";
 $nummems = 0;
 foreach ($members as $member) {
-	$namebbox = imagettfbbox(pxtoPt(16), 0, $font, $member->name);
+	$namebbox = imagettfbbox(pxtoPt(16), 0, (dirname(__FILE__) . '/base/washrab.ttf'), $member->name);
 	$namelen = $namebbox[2] - $namebbox[0];
 /* 	if ($namelen < $charlen) {
 		$namestr = $member->name;
@@ -235,11 +250,31 @@ foreach ($members as $member) {
 		
 	} */
 	$namestr = $member->name;
-    $outstring = $outstring . $namestr . " " . " L" . $member->level . " XpToLvl " . $member->exptolevel . "\n  HP " . $member->hp . "/" . $member->basehp . " MP " . $member->mp . "/" . $member->basemp . "\n ";
-	$outstring = $outstring . " Wp: " . $member->weapon ."\n  Ar: " . $member->armor . "\n  Ac: ". $member->accessory . "\n";
+    $outstring = $outstring . $namestr;
+	$outstring = $outstring	. " " . " L";
+	$outstring = $outstring	. $member->level;
+	$outstring = $outstring	. " XpToLvl ";
+	$outstring = $outstring	. $member->exptolevel;
+	$outstring = $outstring	. "\n  HP ";
+	$outstring = $outstring	. $member->hp;
+	$outstring = $outstring	. "/";
+	$outstring = $outstring	. $member->basehp;
+	$outstring = $outstring	. " MP ";
+	$outstring = $outstring	. $member->mp;
+	$outstring = $outstring	. "/";
+	$outstring = $outstring	. $member->basemp;
+	$outstring = $outstring	. "\n ";
+	$outstring = $outstring . " Wp: ";
+	$outstring = $outstring	. $member->weapon;
+	$outstring = $outstring	."\n  Ar: ";
+	$outstring = $outstring	. $member->armor;
+	$outstring = $outstring	. "\n  Ac: ";
+	$outstring = $outstring . $member->accessory . "\n";
 	$outstring = $outstring . "\n";
 }
-$outstring = $outstring . "\n";
+$outnotes = utf8_wordwrap($status->quicknotes, 25, "\n", true);
+$outstring = $outstring . "Last Note: \n" . $outnotes;
+$outstring = $outstring . "\n\n";
 // Mods
 $outstring = $outstring . "Mods:\n";
 $outstring = $outstring . "-Custom Random Battle/Fanfare\n";

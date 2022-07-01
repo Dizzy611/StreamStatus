@@ -29,13 +29,13 @@ Partial Class StatusUpdateGUIFrontend
         Me.Time = New System.Windows.Forms.Label()
         Me.PartyLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Status = New System.Windows.Forms.Label()
-        Me.StartButton = New System.Windows.Forms.Button()
         Me.Party = New System.Windows.Forms.Label()
         Me.Location = New System.Windows.Forms.Label()
         Me.LastEvent = New System.Windows.Forms.TextBox()
         Me.LastEventLabel = New System.Windows.Forms.Label()
         Me.CurrentNotes = New System.Windows.Forms.Label()
+        Me.StatusIcon = New System.Windows.Forms.PictureBox()
+        CType(Me.StatusIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DiscNum
@@ -82,28 +82,6 @@ Partial Class StatusUpdateGUIFrontend
         '
         Me.Timer1.Interval = 1000
         '
-        'Status
-        '
-        Me.Status.AutoSize = True
-        Me.Status.ForeColor = System.Drawing.Color.Red
-        Me.Status.Location = New System.Drawing.Point(386, 32)
-        Me.Status.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Status.Name = "Status"
-        Me.Status.Size = New System.Drawing.Size(21, 13)
-        Me.Status.TabIndex = 1
-        Me.Status.Text = "Off"
-        '
-        'StartButton
-        '
-        Me.StartButton.ForeColor = System.Drawing.Color.Green
-        Me.StartButton.Location = New System.Drawing.Point(389, 0)
-        Me.StartButton.Margin = New System.Windows.Forms.Padding(2)
-        Me.StartButton.Name = "StartButton"
-        Me.StartButton.Size = New System.Drawing.Size(94, 30)
-        Me.StartButton.TabIndex = 3
-        Me.StartButton.Text = "Start"
-        Me.StartButton.UseVisualStyleBackColor = True
-        '
         'Party
         '
         Me.Party.AutoSize = True
@@ -148,18 +126,27 @@ Partial Class StatusUpdateGUIFrontend
         Me.CurrentNotes.Size = New System.Drawing.Size(0, 13)
         Me.CurrentNotes.TabIndex = 1
         '
+        'StatusIcon
+        '
+        Me.StatusIcon.InitialImage = CType(resources.GetObject("StatusIcon.InitialImage"), System.Drawing.Image)
+        Me.StatusIcon.Location = New System.Drawing.Point(425, 9)
+        Me.StatusIcon.Margin = New System.Windows.Forms.Padding(0)
+        Me.StatusIcon.Name = "StatusIcon"
+        Me.StatusIcon.Size = New System.Drawing.Size(50, 50)
+        Me.StatusIcon.TabIndex = 4
+        Me.StatusIcon.TabStop = False
+        '
         'StatusUpdateGUIFrontend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 117)
+        Me.Controls.Add(Me.StatusIcon)
         Me.Controls.Add(Me.CurrentNotes)
         Me.Controls.Add(Me.LastEvent)
         Me.Controls.Add(Me.LastEventLabel)
         Me.Controls.Add(Me.Location)
         Me.Controls.Add(Me.Party)
-        Me.Controls.Add(Me.StartButton)
-        Me.Controls.Add(Me.Status)
         Me.Controls.Add(Me.PartyLabel)
         Me.Controls.Add(Me.Time)
         Me.Controls.Add(Me.LocationLabel)
@@ -174,12 +161,18 @@ Partial Class StatusUpdateGUIFrontend
         Me.Name = "StatusUpdateGUIFrontend"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "FF7 Stream Status Overlay: Live Updater"
+        CType(Me.StatusIcon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        StatusIcon.BackColor = Color.Transparent
+        SetStyle(ControlStyles.SupportsTransparentBackColor, True)
+        StatusIcon.ImageLocation = ("base/icons/stop.png")
+        StatusIcon.Load()
+        LastEvent.Text = "Press start to be able to save notes. Press enter to confirm notes in box."
         Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
         CurrentNotes.Text = StripTags(testdata)
     End Sub
@@ -194,27 +187,18 @@ Partial Class StatusUpdateGUIFrontend
         End If
     End Sub
 
-    '  Private Sub LastEvent_KeyPress(sender As System.Object, e As System.EventArgs) Handles LastEvent.KeyPress
-    ' Dim tmp As System.Windows.Forms.KeyPressEventArgs = e
-    'If tmp.KeyChar = ChrW(Keys.Enter) Then
-    '       committedLastEvent = LTrim(LastEvent.Text)
-    '      ScreenUpdate()
-    'End If
-    'End Sub
-
     Friend WithEvents DiscNum As System.Windows.Forms.Label
     Friend WithEvents LocationLabel As System.Windows.Forms.Label
     Friend WithEvents Time As System.Windows.Forms.Label
     Friend WithEvents PartyLabel As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents Status As System.Windows.Forms.Label
-    Friend WithEvents StartButton As System.Windows.Forms.Button
     Friend WithEvents Party As System.Windows.Forms.Label
 #Disable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
     Friend WithEvents Location As System.Windows.Forms.Label
     Friend WithEvents LastEvent As TextBox
     Friend WithEvents LastEventLabel As Label
     Friend WithEvents CurrentNotes As Label
+    Friend WithEvents StatusIcon As PictureBox
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
 
 End Class

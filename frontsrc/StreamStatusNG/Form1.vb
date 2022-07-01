@@ -47,30 +47,30 @@ Public Class StatusUpdateGUIFrontend
     Private Sub UpdateStatus()
         Select Case StatusBar
             Case 255
-                Me.Status.ForeColor = System.Drawing.Color.Red
-                Status.Text = "Off"
+                StatusIcon.ImageLocation = ("base/icons/stop.png")
+                StatusIcon.Load()
             Case 254
-                Me.Status.ForeColor = System.Drawing.Color.Blue
-                Status.Text = "Error"
+                StatusIcon.ImageLocation = ("base/icons/error.png")
+                StatusIcon.Load()
             Case 0
-                Me.Status.ForeColor = System.Drawing.Color.Green
-                Status.Text = "ON"
+                StatusIcon.ImageLocation = ("base/icons/start.png")
+                StatusIcon.Load()
                 StatusBar = StatusBar + 1
             Case 1
-                Me.Status.ForeColor = System.Drawing.Color.Green
-                Status.Text = "ON"
+                StatusIcon.ImageLocation = ("base/icons/start.png")
+                StatusIcon.Load()
                 StatusBar = StatusBar + 1
             Case 2
-                Me.Status.ForeColor = System.Drawing.Color.Green
-                Status.Text = "ON"
+                StatusIcon.ImageLocation = ("base/icons/start.png")
+                StatusIcon.Load()
                 StatusBar = StatusBar + 1
             Case 3
-                Me.Status.ForeColor = System.Drawing.Color.Green
-                Status.Text = "ON"
+                StatusIcon.ImageLocation = ("base/icons/start.png")
+                StatusIcon.Load()
                 StatusBar = 0
             Case Else
-                Me.Status.ForeColor = System.Drawing.Color.Red
-                Status.Text = "Off"
+                StatusIcon.ImageLocation = ("base/icons/stop.png")
+                StatusIcon.Load()
                 StatusBar = 0
         End Select
     End Sub
@@ -277,14 +277,32 @@ Public Class StatusUpdateGUIFrontend
 
 #Region "Event Handlers"
 
-    Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click
+
+#End Region
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If Started = False Then
+            StreamTime = 0
+            Timer1.Enabled = False
+            Return
+        End If
+        StreamTime = StreamTime + 1
+        Dim TempBytes As Byte()
+        TempBytes = MemRead.ReadMemory(New IntPtr(&HDBFD38), 4342)
+        If Not mySaveMap.Update(TempBytes) Or Not mySaveMap.IsValid Then
+            Timer1.Enabled = False
+            ExceptionHandler("SaveMap failed to update. Is FF7 no longer running? Terminating.")
+        End If
+        ScreenUpdate()
+    End Sub
+
+    Private Sub StatusIcon_Click(sender As Object, e As EventArgs) Handles StatusIcon.Click
         If Started = True Then
             StreamTime = 0
             Started = False
             Timer1.Enabled = False
             StatusBar = 255
-            Me.StartButton.ForeColor = System.Drawing.Color.Green
-            StartButton.Text = "Start"
+            StatusIcon.ImageLocation = ("base/icons/start.png")
+            StatusIcon.Load()
             UpdateStatus()
             Return
         End If
@@ -312,31 +330,13 @@ Public Class StatusUpdateGUIFrontend
             Started = True
             Timer1.Enabled = True
             StatusBar = 1
-            Me.StartButton.ForeColor = System.Drawing.Color.Red
-            StartButton.Text = "Stop"
+            StatusIcon.ImageLocation = ("base/icons/stop.png")
+            StatusIcon.Load()
             UpdateStatus()
             Return
         End If
         ScreenUpdate()
     End Sub
-#End Region
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If Started = False Then
-            StreamTime = 0
-            Timer1.Enabled = False
-            Return
-        End If
-        StreamTime = StreamTime + 1
-        Dim TempBytes As Byte()
-        TempBytes = MemRead.ReadMemory(New IntPtr(&HDBFD38), 4342)
-        If Not mySaveMap.Update(TempBytes) Or Not mySaveMap.IsValid Then
-            Timer1.Enabled = False
-            ExceptionHandler("SaveMap failed to update. Is FF7 no longer running? Terminating.")
-        End If
-        ScreenUpdate()
-    End Sub
-
-
 End Class
 
 Public Class FF7SaveMap
