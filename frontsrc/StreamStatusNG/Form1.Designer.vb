@@ -46,6 +46,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.DiscNum.Name = "DiscNum"
         Me.DiscNum.Size = New System.Drawing.Size(49, 13)
         Me.DiscNum.TabIndex = 0
+        Me.DiscNum.TabStop = False
         Me.DiscNum.Text = "Disc X/3"
         '
         'LocationLabel
@@ -55,7 +56,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.LocationLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LocationLabel.Name = "LocationLabel"
         Me.LocationLabel.Size = New System.Drawing.Size(54, 13)
-        Me.LocationLabel.TabIndex = 2
+        Me.LocationLabel.TabIndex = 1
+        Me.DiscNum.TabStop = False
         Me.LocationLabel.Text = "Location: "
         '
         'Time
@@ -65,7 +67,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.Time.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Time.Name = "Time"
         Me.Time.Size = New System.Drawing.Size(318, 13)
-        Me.Time.TabIndex = 3
+        Me.Time.TabIndex = 1
+        Me.DiscNum.TabStop = False
         Me.Time.Text = "Time: Local (HH:MM:SS) Stream (HH:MM:SS) Game (HH:MM:SS)"
         '
         'PartyLabel
@@ -75,7 +78,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.PartyLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.PartyLabel.Name = "PartyLabel"
         Me.PartyLabel.Size = New System.Drawing.Size(34, 13)
-        Me.PartyLabel.TabIndex = 6
+        Me.PartyLabel.TabIndex = 1
+        Me.DiscNum.TabStop = False
         Me.PartyLabel.Text = "Party:"
         '
         'Timer1
@@ -90,7 +94,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.Status.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Status.Name = "Status"
         Me.Status.Size = New System.Drawing.Size(21, 13)
-        Me.Status.TabIndex = 14
+        Me.Status.TabIndex = 1
+        Me.DiscNum.TabStop = False
         Me.Status.Text = "Off"
         '
         'StartButton
@@ -100,7 +105,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.StartButton.Margin = New System.Windows.Forms.Padding(2)
         Me.StartButton.Name = "StartButton"
         Me.StartButton.Size = New System.Drawing.Size(94, 30)
-        Me.StartButton.TabIndex = 22
+        Me.StartButton.TabIndex = 3
         Me.StartButton.Text = "Start"
         Me.StartButton.UseVisualStyleBackColor = True
         '
@@ -111,7 +116,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.Party.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Party.Name = "Party"
         Me.Party.Size = New System.Drawing.Size(0, 13)
-        Me.Party.TabIndex = 33
+        Me.Party.TabIndex = 1
+        Me.DiscNum.TabStop = False
         '
         'Location
         '
@@ -120,7 +126,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.Location.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Location.Name = "Location"
         Me.Location.Size = New System.Drawing.Size(0, 13)
-        Me.Location.TabIndex = 34
+        Me.Location.TabIndex = 1
+        Me.DiscNum.TabStop = False
         '
         'LastEvent
         '
@@ -128,7 +135,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEvent.Margin = New System.Windows.Forms.Padding(2)
         Me.LastEvent.Name = "LastEvent"
         Me.LastEvent.Size = New System.Drawing.Size(482, 20)
-        Me.LastEvent.TabIndex = 37
+        Me.LastEvent.TabIndex = 2
         '
         'LastEventLabel
         '
@@ -137,7 +144,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEventLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LastEventLabel.Name = "LastEventLabel"
         Me.LastEventLabel.Size = New System.Drawing.Size(35, 13)
-        Me.LastEventLabel.TabIndex = 36
+        Me.LastEventLabel.TabIndex = 1
+        Me.DiscNum.TabStop = False
         Me.LastEventLabel.Text = "Notes"
         '
         'CurrentNotes
@@ -146,7 +154,8 @@ Partial Class StatusUpdateGUIFrontend
         Me.CurrentNotes.Location = New System.Drawing.Point(39, 82)
         Me.CurrentNotes.Name = "CurrentNotes"
         Me.CurrentNotes.Size = New System.Drawing.Size(0, 13)
-        Me.CurrentNotes.TabIndex = 38
+        Me.CurrentNotes.TabIndex = 1
+        Me.DiscNum.TabStop = False
         '
         'StatusUpdateGUIFrontend
         '
