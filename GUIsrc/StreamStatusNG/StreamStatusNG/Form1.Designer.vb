@@ -188,7 +188,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.Controls.Add(Me.LocationLabel)
         Me.Controls.Add(Me.DiscNum)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+		Me.Icon = New Icon("base\lightning-icon.ico")
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(498, 152)
