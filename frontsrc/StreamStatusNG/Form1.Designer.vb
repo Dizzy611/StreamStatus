@@ -46,7 +46,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.DiscNum.Name = "DiscNum"
         Me.DiscNum.Size = New System.Drawing.Size(49, 13)
         Me.DiscNum.TabIndex = 0
-        Me.DiscNum.TabStop = False
         Me.DiscNum.Text = "Disc X/3"
         '
         'LocationLabel
@@ -57,7 +56,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.LocationLabel.Name = "LocationLabel"
         Me.LocationLabel.Size = New System.Drawing.Size(54, 13)
         Me.LocationLabel.TabIndex = 1
-        Me.DiscNum.TabStop = False
         Me.LocationLabel.Text = "Location: "
         '
         'Time
@@ -68,7 +66,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Time.Name = "Time"
         Me.Time.Size = New System.Drawing.Size(318, 13)
         Me.Time.TabIndex = 1
-        Me.DiscNum.TabStop = False
         Me.Time.Text = "Time: Local (HH:MM:SS) Stream (HH:MM:SS) Game (HH:MM:SS)"
         '
         'PartyLabel
@@ -79,7 +76,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.PartyLabel.Name = "PartyLabel"
         Me.PartyLabel.Size = New System.Drawing.Size(34, 13)
         Me.PartyLabel.TabIndex = 1
-        Me.DiscNum.TabStop = False
         Me.PartyLabel.Text = "Party:"
         '
         'Timer1
@@ -95,7 +91,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Status.Name = "Status"
         Me.Status.Size = New System.Drawing.Size(21, 13)
         Me.Status.TabIndex = 1
-        Me.DiscNum.TabStop = False
         Me.Status.Text = "Off"
         '
         'StartButton
@@ -117,7 +112,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Party.Name = "Party"
         Me.Party.Size = New System.Drawing.Size(0, 13)
         Me.Party.TabIndex = 1
-        Me.DiscNum.TabStop = False
         '
         'Location
         '
@@ -127,7 +121,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Location.Name = "Location"
         Me.Location.Size = New System.Drawing.Size(0, 13)
         Me.Location.TabIndex = 1
-        Me.DiscNum.TabStop = False
         '
         'LastEvent
         '
@@ -145,7 +138,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEventLabel.Name = "LastEventLabel"
         Me.LastEventLabel.Size = New System.Drawing.Size(35, 13)
         Me.LastEventLabel.TabIndex = 1
-        Me.DiscNum.TabStop = False
         Me.LastEventLabel.Text = "Notes"
         '
         'CurrentNotes
@@ -155,13 +147,12 @@ Partial Class StatusUpdateGUIFrontend
         Me.CurrentNotes.Name = "CurrentNotes"
         Me.CurrentNotes.Size = New System.Drawing.Size(0, 13)
         Me.CurrentNotes.TabIndex = 1
-        Me.DiscNum.TabStop = False
         '
         'StatusUpdateGUIFrontend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(482, 113)
+        Me.ClientSize = New System.Drawing.Size(484, 117)
         Me.Controls.Add(Me.CurrentNotes)
         Me.Controls.Add(Me.LastEvent)
         Me.Controls.Add(Me.LastEventLabel)
@@ -177,9 +168,9 @@ Partial Class StatusUpdateGUIFrontend
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(498, 152)
+        Me.MaximumSize = New System.Drawing.Size(500, 156)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(498, 152)
+        Me.MinimumSize = New System.Drawing.Size(500, 156)
         Me.Name = "StatusUpdateGUIFrontend"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "FF7 Stream Status Overlay: Live Updater"
