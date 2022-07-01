@@ -170,7 +170,7 @@ Partial Class StatusUpdateGUIFrontend
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         StatusIcon.BackColor = Color.Transparent
         SetStyle(ControlStyles.SupportsTransparentBackColor, True)
-        StatusIcon.ImageLocation = ("base/icons/stop.png")
+        StatusIcon.ImageLocation = ("base/icons/error.png")
         StatusIcon.Load()
         LastEvent.Text = "Press start to be able to save notes. Press enter to confirm notes in box."
         Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)

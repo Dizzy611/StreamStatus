@@ -150,10 +150,10 @@ Public Class StatusUpdateGUIFrontend
         End If
         UpdateStatus()
         If mySaveMap.Disc >= 1 And mySaveMap.Disc <= 3 Then
-            DiscNum.Text = "Disc " & mySaveMap.Disc.ToString() & "/3"
+            'DiscNum.Text = "Disc " & mySaveMap.Disc.ToString() & "/3"
             myXMLInput.Disc = mySaveMap.Disc
         Else
-            DiscNum.Text = "Disc X/3"
+            'DiscNum.Text = "Disc X/3"
             myXMLInput.Disc = 0
         End If
         If mySaveMap.LiveGil = 0 Then
@@ -168,10 +168,19 @@ Public Class StatusUpdateGUIFrontend
             Location.Text = ""
             myXMLInput.Location = "Unknown"
         End If
-        If StreamTime > 0 And mySaveMap.LiveTotalSeconds > 0 Then
-            Time.Text = "Time: Local (" & DateTime.Now.ToString("HH:mm:ss") & ") Stream (" & SecsToHMS(StreamTime) & ") Game (" & SecsToHMS(mySaveMap.LiveTotalSeconds) & ")"
+        If StreamTime > 0 Then
             myXMLInput.StreamTime = SecsToHMS(StreamTime)
-            myXMLInput.GameTime = SecsToHMS(mySaveMap.LiveTotalSeconds)
+            Time.Text = "Time: Local (" & DateTime.Now.ToString("HH:mm:ss") & ") Stream (" & SecsToHMS(StreamTime) & ")"
+            If StreamTime > 0 And mySaveMap.LiveTotalSeconds > 0 Then
+                Time.Text = "Time: Local (" & DateTime.Now.ToString("HH:mm:ss") & ") Stream (" & SecsToHMS(StreamTime) & ") Game (" & SecsToHMS(mySaveMap.LiveTotalSeconds) & ")"
+                myXMLInput.GameTime = SecsToHMS(mySaveMap.LiveTotalSeconds)
+            End If
+            If StreamTime > 0 And mySaveMap.LiveTotalSeconds <= 0 Then
+                Time.Text = "Time: Local (" & DateTime.Now.ToString("HH:mm:ss") & ") Stream (" & SecsToHMS(StreamTime) & ")"
+                myXMLInput.GameTime = "00:00:00"
+            End If
+
+
         Else
             Time.Text = "Time: Local (" & DateTime.Now.ToString("HH:mm:ss") & ")"
             myXMLInput.StreamTime = "00:00:00"
