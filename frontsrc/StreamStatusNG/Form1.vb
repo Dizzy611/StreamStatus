@@ -132,11 +132,11 @@ Public Class StatusUpdateGUIFrontend
                 writer.WriteEndElement()                                           '    </party>
                 writer.WriteEndElement()                                              ' </status>
                 If My.Settings.ModList = True Then
-                    'writer.WriteStartElement("modlist")                             ' <modlist>
+                    writer.WriteStartElement("modlisting")
                     For Each listtext As String In ModlistForm.modlistentry
                         writer.WriteElementString("modentry", listtext)             ' <modentry>listtext</modentry>
                     Next
-                    'writer.WriteEndElement()                                       '        </modlist>
+                    writer.WriteEndElement()
                 End If
 
                 writer.WriteEndDocument()

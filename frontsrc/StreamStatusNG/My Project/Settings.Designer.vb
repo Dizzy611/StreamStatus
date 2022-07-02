@@ -13,21 +13,21 @@ Option Explicit On
 
 
 
-<Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0"),  _
- Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+<Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0"),
+ Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>
 Partial Public NotInheritable Class MySettings
     Inherits Global.System.Configuration.ApplicationSettingsBase
-    
-    Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
-    
+
+    Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
+
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
     Private Shared addedHandler As Boolean
 
     Private Shared addedHandlerLockObject As New Object
 
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>
     Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
         If My.Application.SaveMySettingsOnExit Then
             My.Settings.Save()
@@ -35,89 +35,89 @@ Partial Public NotInheritable Class MySettings
     End Sub
 #End If
 #End Region
-    
+
     Public Shared ReadOnly Property [Default]() As MySettings
         Get
-            
+
 #If _MyType = "WindowsForms" Then
-               If Not addedHandler Then
-                    SyncLock addedHandlerLockObject
-                        If Not addedHandler Then
-                            AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
-                            addedHandler = True
-                        End If
-                    End SyncLock
-                End If
+            If Not addedHandler Then
+                SyncLock addedHandlerLockObject
+                    If Not addedHandler Then
+                        AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
+                        addedHandler = True
+                    End If
+                End SyncLock
+            End If
 #End If
             Return defaultInstance
         End Get
     End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
-     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+
+    <Global.System.Configuration.UserScopedSettingAttribute(),
+     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Configuration.DefaultSettingValueAttribute("True"),
+     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>
     Public Property GilDisplay() As Boolean
         Get
-            Return CType(Me("GilDisplay"),Boolean)
+            Return CType(Me("GilDisplay"), Boolean)
         End Get
         Set
-            Me("GilDisplay") = value
+            Me("GilDisplay") = Value
         End Set
     End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Nothing Here"),  _
-     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+
+    <Global.System.Configuration.UserScopedSettingAttribute(),
+     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Configuration.DefaultSettingValueAttribute("Nothing Here"),
+     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>
     Public Property quicknotes() As String
         Get
-            Return CType(Me("quicknotes"),String)
+            Return CType(Me("quicknotes"), String)
         End Get
         Set
-            Me("quicknotes") = value
+            Me("quicknotes") = Value
         End Set
     End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
-     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+
+    <Global.System.Configuration.UserScopedSettingAttribute(),
+     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Configuration.DefaultSettingValueAttribute("True"),
+     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>
     Public Property WpDisplay() As Boolean
         Get
-            Return CType(Me("WpDisplay"),Boolean)
+            Return CType(Me("WpDisplay"), Boolean)
         End Get
         Set
-            Me("WpDisplay") = value
+            Me("WpDisplay") = Value
         End Set
     End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
-     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+
+    <Global.System.Configuration.UserScopedSettingAttribute(),
+     Global.System.Configuration.SettingsProviderAttribute(GetType(Bluegrams.Application.PortableSettingsProvider)),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Configuration.DefaultSettingValueAttribute("True"),
+     Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>
     Public Property ModList() As Boolean
         Get
-            Return CType(Me("ModList"),Boolean)
+            Return CType(Me("ModList"), Boolean)
         End Get
         Set
-            Me("ModList") = value
+            Me("ModList") = Value
         End Set
     End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+
+    <Global.System.Configuration.UserScopedSettingAttribute(),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Configuration.DefaultSettingValueAttribute("False")>
     Public Property Setting() As Boolean
         Get
-            Return CType(Me("Setting"),Boolean)
+            Return CType(Me("Setting"), Boolean)
         End Get
         Set
-            Me("Setting") = value
+            Me("Setting") = Value
         End Set
     End Property
 End Class
