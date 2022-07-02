@@ -9,9 +9,12 @@
       <Value Profile="(Default)">None</Value>
     </Setting>
     <Setting Name="WpDisplay" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ModList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

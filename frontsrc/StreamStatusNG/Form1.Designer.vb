@@ -181,6 +181,11 @@ Partial Class StatusUpdateGUIFrontend
         Dim Modlist As New List(Of String)
         If My.Settings.ModList Is Nothing Then
             My.Settings.ModList = New System.Collections.Specialized.StringCollection
+            My.Settings.ModList.Clear()
+            For Each item In Modlist
+                My.Settings.ModList.Add(item)
+            Next
+            My.Settings.Save()
             ModlistForm.MainModList.Items.Add("None")
         End If
         StatusIcon.BackColor = Color.Transparent

@@ -14,9 +14,9 @@ Option Explicit On
 
 
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-Partial Friend NotInheritable Class MySettings
+Partial Public NotInheritable Class MySettings
     Inherits Global.System.Configuration.ApplicationSettingsBase
     
     Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
@@ -77,8 +77,7 @@ Partial Friend NotInheritable Class MySettings
     End Property
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Public Property WpDisplay() As Boolean
         Get
             Return CType(Me("WpDisplay"),Boolean)
@@ -96,6 +95,18 @@ Partial Friend NotInheritable Class MySettings
         End Get
         Set
             Me("ModList") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property Setting() As String
+        Get
+            Return CType(Me("Setting"),String)
+        End Get
+        Set
+            Me("Setting") = value
         End Set
     End Property
 End Class
