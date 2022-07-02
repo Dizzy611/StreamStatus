@@ -5,7 +5,6 @@ Imports System.Text.RegularExpressions
 Imports System.Drawing
 
 
-
 Public Class StatusUpdateGUIFrontend
 
 #Region "Variables and Definitions"
@@ -18,6 +17,7 @@ Public Class StatusUpdateGUIFrontend
     Dim MemRead As NativeMemoryReader
     Dim committedLastEvent As String = "None"
     Dim sReader As String
+
 
 
 
@@ -131,6 +131,14 @@ Public Class StatusUpdateGUIFrontend
                 Next
                 writer.WriteEndElement()                                           '    </party>
                 writer.WriteEndElement()                                              ' </status>
+                If My.Settings.ModList = True Then
+                    'writer.WriteStartElement("modlist")                             ' <modlist>
+                    For Each listtext As String In ModlistForm.modlistentry
+                        writer.WriteElementString("modentry", listtext)             ' <modentry>listtext</modentry>
+                    Next
+                    'writer.WriteEndElement()                                       '        </modlist>
+                End If
+
                 writer.WriteEndDocument()
             End Using
         Catch ex As System.IO.IOException

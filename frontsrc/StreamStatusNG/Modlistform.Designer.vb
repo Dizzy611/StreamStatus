@@ -24,8 +24,8 @@ Partial Class ModlistForm
     Private Sub InitializeComponent()
         Me.MainModList = New System.Windows.Forms.ListBox()
         Me.ModTextBox = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.AddModButton = New System.Windows.Forms.Button()
+        Me.DelModButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'MainModList
@@ -44,31 +44,31 @@ Partial Class ModlistForm
         Me.ModTextBox.TabIndex = 1
         Me.ModTextBox.WordWrap = False
         '
-        'Button1
+        'AddModButton
         '
-        Me.Button1.Location = New System.Drawing.Point(53, 387)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.AddModButton.Location = New System.Drawing.Point(53, 387)
+        Me.AddModButton.Name = "AddModButton"
+        Me.AddModButton.Size = New System.Drawing.Size(75, 23)
+        Me.AddModButton.TabIndex = 2
+        Me.AddModButton.Text = "Add Mod"
+        Me.AddModButton.UseVisualStyleBackColor = True
         '
-        'Button2
+        'DelModButton
         '
-        Me.Button2.Location = New System.Drawing.Point(164, 387)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.DelModButton.Location = New System.Drawing.Point(164, 387)
+        Me.DelModButton.Name = "DelModButton"
+        Me.DelModButton.Size = New System.Drawing.Size(75, 23)
+        Me.DelModButton.TabIndex = 3
+        Me.DelModButton.Text = "Del Mod"
+        Me.DelModButton.UseVisualStyleBackColor = True
         '
         'ModlistForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 461)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.DelModButton)
+        Me.Controls.Add(Me.AddModButton)
         Me.Controls.Add(Me.ModTextBox)
         Me.Controls.Add(Me.MainModList)
         Me.MaximizeBox = False
@@ -87,6 +87,6 @@ Partial Class ModlistForm
 
     Friend WithEvents MainModList As ListBox
     Friend WithEvents ModTextBox As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents AddModButton As Button
+    Friend WithEvents DelModButton As Button
 End Class

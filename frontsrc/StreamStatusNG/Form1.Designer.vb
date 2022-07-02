@@ -1,5 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class StatusUpdateGUIFrontend
+
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -179,15 +180,7 @@ Partial Class StatusUpdateGUIFrontend
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim Modlist As New List(Of String)
-        If My.Settings.ModList Is Nothing Then
-            My.Settings.ModList = New System.Collections.Specialized.StringCollection
-            My.Settings.ModList.Clear()
-            For Each item In Modlist
-                My.Settings.ModList.Add(item)
-            Next
-            My.Settings.Save()
-            ModlistForm.MainModList.Items.Add("None")
-        End If
+        ModlistForm.MainModList.Items.Add("None")
         StatusIcon.BackColor = Color.Transparent
         SetStyle(ControlStyles.SupportsTransparentBackColor, True)
         StatusIcon.ImageLocation = ("base/icons/error.png")

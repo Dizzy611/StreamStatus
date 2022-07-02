@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("StreamStatusNG")> 
-<Assembly: AssemblyDescription("Stream status overlay for twitch streams.")> 
-<Assembly: AssemblyCompany("Morrison Independent Consulting")> 
-<Assembly: AssemblyProduct("StreamStatusNG")> 
-<Assembly: AssemblyCopyright("Copyright ©  2015 Dylan J. Morrison")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("Stream Status Neon")>
+<Assembly: AssemblyDescription("Stream Overlay Helper for Final Fantasy 7")>
+<Assembly: AssemblyCompany("7h Community")>
+<Assembly: AssemblyProduct("Streamstatusneon")>
+<Assembly: AssemblyCopyright("me")>
+<Assembly: AssemblyTrademark("no")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("acc848a3-83e9-4b7b-8c89-89c367ac6319")> 
+<Assembly: Guid("acc848a3-83e9-4b7b-8c89-89c367ac6319")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("0.0.0.1")>
+<Assembly: AssemblyFileVersion("0.9.0.1")>
