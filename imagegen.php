@@ -229,7 +229,10 @@ $outstring = $outstring . "Local" . $localpad . " - " . date("H:i:s") . "\n";
 //$outstring = $outstring . "Stream" . $streampad . " - " . $streamtime . "\n";
 $outstring = $outstring . "In-Game - " . $gametime . "\n";
 $outstring = $outstring . "Disc " . $disc . "/3\n". "Location:\n " . $location . "\n";
+if (isset($status->gil)) {
 $outstring = $outstring . "Gil " . $status->gil . "\n";
+} else {
+}
 $nummems = 0;
 foreach ($members as $member) {
 	$namebbox = imagettfbbox(pxtoPt(16), 0, (dirname(__FILE__) . '/base/washrab.ttf'), $member->name);
@@ -263,9 +266,11 @@ foreach ($members as $member) {
 	$outstring = $outstring	. $member->mp;
 	$outstring = $outstring	. "/";
 	$outstring = $outstring	. $member->basemp;
-	$outstring = $outstring	. "\n ";
-	$outstring = $outstring . " Wp: ";
-	$outstring = $outstring	. $member->weapon;
+	if (isset($member->weapon)) {
+		$outstring = $outstring	. "\n ";
+		$outstring = $outstring . " Wp: ";
+		$outstring = $outstring	. $member->weapon;
+	}
 	$outstring = $outstring	."\n  Ar: ";
 	$outstring = $outstring	. $member->armor;
 	$outstring = $outstring	. "\n  Ac: ";
@@ -276,20 +281,7 @@ $outnotes = utf8_wordwrap($status->quicknotes, 25, "\n", true);
 $outstring = $outstring . "Last Note: \n" . $outnotes;
 $outstring = $outstring . "\n\n";
 // Mods
-$outstring = $outstring . "Mods:\n";
-$outstring = $outstring . "-Custom Random Battle/Fanfare\n";
-$outstring = $outstring . "-Custom Soundtrack\n";
-$outstring = $outstring . "-Cosmo Memory\n";
-$outstring = $outstring . "-60 FPS Gameplay(and NT addon)\n";
-$outstring = $outstring . "-Ninostyle Models(dyn+chibi)\n";
-$outstring = $outstring . "-Avalanche Arisen Battle\n";
-$outstring = $outstring . "-SYW Field Textures\n";
-$outstring = $outstring . "-New Threat 2.0\n";
-$outstring = $outstring . "-SYW Minigame Textures\n";
-$outstring = $outstring . "-SYW Spell Textures\n";
-$outstring = $outstring . "-Finishing Touch\n";
-$outstring = $outstring . "-Enhanced Stock UI\n";
-$outstring = $outstring . "-SYW Worldmap Textures\n";
+$outstring = $outstring . "Mods:\n-Custom Random Battle/Fanfare\n-Custom Soundtrack\n-Cosmo Memory\n-60 FPS Gameplay(and NT addon)\n-Ninostyle Models(dyn+chibi)\n-Avalanche Arisen Battle\n-SYW Field Textures\n-New Threat 2.0\n-SYW Minigame Textures\n-SYW Spell Textures\n-Finishing Touch\n-Enhanced Stock UI\n-SYW Worldmap Textures\n";
  
 // Trim any leading/trailing newlines or etc from output string
 $outstring = trim($outstring);

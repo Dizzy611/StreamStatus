@@ -107,8 +107,9 @@ Public Class StatusUpdateGUIFrontend
                 writer.WriteElementString("location", Input.Location)              '    <location>God Knows</location>
                 writer.WriteElementString("streamtime", Input.StreamTime)          '    <timestarted>1428292404</timestarted>
                 writer.WriteElementString("gametime", Input.GameTime)              '    <gametime>79324</gametime>
-                writer.WriteElementString("gil", Input.LiveGil)                        '    <gil>1234</gil>
-                'writer.WriteElementString("lastevent", Input.LastEvent)            '    <lastevent>I Picked a Booger</lastevent>
+                If My.Settings.GilDisplay = True Then
+                    writer.WriteElementString("gil", Input.LiveGil)                        '    <gil>1234</gil>
+                End If
                 writer.WriteStartElement("party")                                  '    <party>
                 Dim Index As Byte = 0
                 For Each myName In Input.PartyNames
@@ -120,7 +121,9 @@ Public Class StatusUpdateGUIFrontend
                     writer.WriteElementString("basemp", Input.BaseMP(Index).ToString())                      '            <basemp>6969</basemp>
                     writer.WriteElementString("level", Input.PartyLevels(Index).ToString()) '   <level>3</level>
                     writer.WriteElementString("exptolevel", Input.ExpToLevel(Index).ToString()) '   <level>3</level>
-                    writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
+                    If My.Settings.WpDisplay = True Then
+                        writer.WriteElementString("weapon", WeaponNames(Input.Weapon(Index)))    '            <weapon>Blah</weapon>
+                    End If
                     writer.WriteElementString("armor", ArmorNames(Input.Armor(Index)))    '            <armour>Blah</armour>
                     writer.WriteElementString("accessory", AccessoryNames(Input.Accessory(Index)))    '            <Accessory>Blah</Accessory>
                     writer.WriteEndElement()                                       '        </member>
@@ -241,7 +244,9 @@ Public Class StatusUpdateGUIFrontend
             myXMLInput.PartyNames(0) = "None"
             myXMLInput.BaseHP(0) = 0
             myXMLInput.HP(0) = 0
-            myXMLInput.LiveGil = 0
+            If My.Settings.GilDisplay = True Then
+                myXMLInput.LiveGil = 0
+            End If
             myXMLInput.Weapon(0) = "None"
             myXMLInput.Accessory(255) = "None"
             myXMLInput.Armor(0) = "None"
@@ -346,6 +351,12 @@ Public Class StatusUpdateGUIFrontend
         End If
         ScreenUpdate()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Settings.Click
+        Dim Settings As New SettingsForm
+        Settings.Show()
+    End Sub
+
 End Class
 
 Public Class FF7SaveMap

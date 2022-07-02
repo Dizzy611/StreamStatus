@@ -35,6 +35,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.LastEventLabel = New System.Windows.Forms.Label()
         Me.CurrentNotes = New System.Windows.Forms.Label()
         Me.StatusIcon = New System.Windows.Forms.PictureBox()
+        Me.Settings = New System.Windows.Forms.Button()
         CType(Me.StatusIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,7 +46,7 @@ Partial Class StatusUpdateGUIFrontend
         Me.DiscNum.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.DiscNum.Name = "DiscNum"
         Me.DiscNum.Size = New System.Drawing.Size(49, 13)
-        Me.DiscNum.TabIndex = 0
+        Me.DiscNum.TabIndex = 1
         Me.DiscNum.Text = "Disc X/3"
         '
         'LocationLabel
@@ -136,11 +137,21 @@ Partial Class StatusUpdateGUIFrontend
         Me.StatusIcon.TabIndex = 4
         Me.StatusIcon.TabStop = False
         '
+        'Settings
+        '
+        Me.Settings.Location = New System.Drawing.Point(408, 72)
+        Me.Settings.Name = "Settings"
+        Me.Settings.Size = New System.Drawing.Size(75, 23)
+        Me.Settings.TabIndex = 5
+        Me.Settings.Text = "Settings"
+        Me.Settings.UseVisualStyleBackColor = True
+        '
         'StatusUpdateGUIFrontend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 117)
+        Me.Controls.Add(Me.Settings)
         Me.Controls.Add(Me.StatusIcon)
         Me.Controls.Add(Me.CurrentNotes)
         Me.Controls.Add(Me.LastEvent)
@@ -156,7 +167,6 @@ Partial Class StatusUpdateGUIFrontend
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(500, 156)
-        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(500, 156)
         Me.Name = "StatusUpdateGUIFrontend"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
@@ -173,17 +183,19 @@ Partial Class StatusUpdateGUIFrontend
         StatusIcon.ImageLocation = ("base/icons/error.png")
         StatusIcon.Load()
         LastEvent.Text = "Press start to be able to save notes. Press enter to confirm notes in box."
-        Dim testdata = System.IO.File.ReadAllLines("Status.xml")(2)
-        CurrentNotes.Text = StripTags(testdata)
+        CurrentNotes.Text = My.Settings.quicknotes
     End Sub
 
     Private Sub LastEvent_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles LastEvent.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-            CurrentNotes.Text = LTrim(LastEvent.Text)
-            committedLastEvent = LTrim(LastEvent.Text)
-            ScreenUpdate()
+        If Started = True Then
+            If e.KeyCode = Keys.Enter Then
+                e.Handled = True
+                e.SuppressKeyPress = True
+                CurrentNotes.Text = LTrim(LastEvent.Text)
+                committedLastEvent = LTrim(LastEvent.Text)
+                My.Settings.quicknotes = LTrim(LastEvent.Text)
+                ScreenUpdate()
+            End If
         End If
     End Sub
 
@@ -199,6 +211,7 @@ Partial Class StatusUpdateGUIFrontend
     Friend WithEvents LastEventLabel As Label
     Friend WithEvents CurrentNotes As Label
     Friend WithEvents StatusIcon As PictureBox
+    Friend WithEvents Settings As Button
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
 
 End Class
