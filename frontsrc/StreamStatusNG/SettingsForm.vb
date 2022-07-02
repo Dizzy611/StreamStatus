@@ -19,4 +19,9 @@
         End If
 
     End Sub
+
+    Private Sub ModlistButton_Click(sender As Object, e As EventArgs) Handles ModlistButton.Click
+        Dim Modlist As New ModlistForm
+        Modlist.Show()
+    End Sub
 End Class

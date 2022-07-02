@@ -87,6 +87,17 @@ Partial Friend NotInheritable Class MySettings
             Me("WpDisplay") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Public Property ModList() As Global.System.Collections.Specialized.StringCollection
+        Get
+            Return CType(Me("ModList"),Global.System.Collections.Specialized.StringCollection)
+        End Get
+        Set
+            Me("ModList") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

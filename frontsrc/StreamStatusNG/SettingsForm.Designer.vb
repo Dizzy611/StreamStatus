@@ -24,6 +24,7 @@ Partial Class SettingsForm
     Private Sub InitializeComponent()
         Me.GilDisplayBox = New System.Windows.Forms.CheckBox()
         Me.WepBox = New System.Windows.Forms.CheckBox()
+        Me.ModlistButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'GilDisplayBox
@@ -46,11 +47,21 @@ Partial Class SettingsForm
         Me.WepBox.Text = "Weapon Display"
         Me.WepBox.UseVisualStyleBackColor = True
         '
+        'ModlistButton
+        '
+        Me.ModlistButton.Location = New System.Drawing.Point(697, 426)
+        Me.ModlistButton.Name = "ModlistButton"
+        Me.ModlistButton.Size = New System.Drawing.Size(75, 23)
+        Me.ModlistButton.TabIndex = 2
+        Me.ModlistButton.Text = "Modlist"
+        Me.ModlistButton.UseVisualStyleBackColor = True
+        '
         'SettingsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 461)
+        Me.Controls.Add(Me.ModlistButton)
         Me.Controls.Add(Me.WepBox)
         Me.Controls.Add(Me.GilDisplayBox)
         Me.MaximizeBox = False
@@ -85,4 +96,5 @@ Partial Class SettingsForm
 
     Friend WithEvents GilDisplayBox As CheckBox
     Friend WithEvents WepBox As CheckBox
+    Friend WithEvents ModlistButton As Button
 End Class
