@@ -1,3 +1,7 @@
+# UPDATE
+This has been superseded by an excellent fork/rewrite created by a user by the name of NeonLightning. Check there for more.
+https://github.com/NeonLightning/StreamStatusNeon
+
 # StreamStatus
 My stream overlay project, designed for my Final Fantasy 7 streaming. An unholy combination of VB, PHP, and JavaScript.
 This project was originally developed to provide an interesting and eye catching overlay
